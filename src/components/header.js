@@ -4,17 +4,12 @@ import React from "react"
 import styled from "styled-components"
 import ImageLink from "./common/imageLink"
 import StyledButton from "./common/button"
+import FlexRow from "./common/container"
 
 const StyledHeader = styled.header`
   background:white;
-  margin: 1.5rem;
+  margin: 0.75rem 2rem;
   padding:0 0 0 0;
-`
-
-const FlexRow = styled(props => <div {...props} />)`
-  display: flex;
-  align-items:center;
-  justify-content:space-between;
 `
 
 const StyledMenuItem = styled(props => <Link {...props} />)`

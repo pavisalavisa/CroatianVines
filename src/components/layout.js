@@ -46,8 +46,11 @@ const Layout = ({ children }) => {
         }}
       >
         <main>{children}</main>
-        <Footer siteDescription={data.site.siteMetadata.description}
-          siteAuthor={data.site.siteMetadata.author} />
+        <Footer
+          logo={data.file.childImageSharp.fixed}
+          siteDescription={data.site.siteMetadata.description}
+          siteAuthor={data.site.siteMetadata.author}
+          navigationItems={data.site.siteMetadata.menuItems} />
       </div>
     </>
   )

@@ -16,6 +16,14 @@ module.exports = {
         title: "Learn",
         path: "/learn",
       },
+      {
+        title: "Experience",
+        path: "/experience",
+      },
+      {
+        title: "Reviews",
+        path: "/reviews",
+      },
     ],
   },
   plugins: [

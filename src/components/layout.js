@@ -13,7 +13,11 @@ const Layout = ({ children }) => {
         siteMetadata {
           title,
           description,
-          author
+          author,
+          menuItems{
+            title,
+            path
+          }
         }
       }
        
@@ -29,9 +33,10 @@ const Layout = ({ children }) => {
   }  
   `)
 
+  console.log(data.site.siteMetadata.menuItems)
   return (
     <>
-      <Header logo={data.file.childImageSharp.fixed} />
+      <Header logo={data.file.childImageSharp.fixed} menuItems={data.site.siteMetadata.menuItems} />
       <div
         style={{
           margin: `0 auto`,

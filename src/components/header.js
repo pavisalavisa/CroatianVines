@@ -8,8 +8,8 @@ import FlexRow from "./common/container"
 
 const StyledHeader = styled.header`
   background:white;
-  margin: 0.75rem 2rem;
-  padding:0 0 0 0;
+  margin: 0 2rem 0.75rem 2rem;
+  padding:1rem 0 0 0;
 `
 
 const StyledMenuItem = styled(props => <Link {...props} />)`

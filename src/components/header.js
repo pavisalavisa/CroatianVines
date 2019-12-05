@@ -35,8 +35,8 @@ const loggedIn = true;
 const AccountSection = () => (
   loggedIn ?
     <FlexRow>
-      <StyledButton margin={"0.5rem"} primary onClick={() => console.log('Clicked log in!')}>Log in</StyledButton>
-      <StyledButton margin={"0.5rem"} onClick={() => console.log('Clicked register!')}>Register</StyledButton>
+      <StyledButton margin="0.5rem" primary onClick={() => console.log('Clicked log in!')}>Log in</StyledButton>
+      <StyledButton margin="0.5rem" onClick={() => console.log('Clicked register!')}>Register</StyledButton>
     </FlexRow>
     :
     <FlexRow>

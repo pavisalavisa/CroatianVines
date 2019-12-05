@@ -13,6 +13,8 @@ const HeroImageWrapper = styled.div`
   display: flex;
   position: relative;
   align-items: center;
+  margin: 0vw;
+  background: linear-gradient(360deg, #ffffff 0%, rgba(255, 255, 255, 0) 7.66%);
 `
 
 const Overlay = styled.div`
@@ -41,8 +43,7 @@ const BackgroundImage = styled(Image)`
   &>img{
       object-fit:${props => props.fit || "cover"} !important;
       object-position:${props => props.position || "50% 50%"} !important;
-      font-family: 'object-fit: ${props => props.fit || "cover"} !important; object-position:${props =>  props.position || "50% 50%"} !important;'
-  }
+      font-family: 'object-fit: ${props => props.fit || "cover"} !important; object-position:${props =>  props.position || "50% 50%"} !important;'}
 `
 
 export default HeroImage

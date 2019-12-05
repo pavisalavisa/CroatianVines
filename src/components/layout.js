@@ -11,45 +11,41 @@ const Layout = ({ children }) => {
     query HeaderQuery {
       site {
         siteMetadata {
-          title,
-          description,
-          author,
-          menuItems{
-            title,
+          title
+          description
+          author
+          menuItems {
+            title
             path
           }
         }
       }
-       
+
       file(relativePath: { eq: "icon.png" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
           fixed(width: 128, height: 60) {
             ...GatsbyImageSharpFixed
-          } 
+          }
         }
       }
-  }  
+    }
   `)
 
   return (
     <>
-      <Header logo={data.file.childImageSharp.fixed} menuItems={data.site.siteMetadata.menuItems} />
-      <div
-        style={{
-          margin: `0 auto`,
-          padding: `0px 1.0875rem 1.45rem`,
-          paddingTop: 0,
-        }}
-      >
-        <main>{children}</main>
-        <Footer
-          logo={data.file.childImageSharp.fixed}
-          siteDescription={data.site.siteMetadata.description}
-          siteAuthor={data.site.siteMetadata.author}
-          navigationItems={data.site.siteMetadata.menuItems} />
-      </div>
+      <Header
+        logo={data.file.childImageSharp.fixed}
+        menuItems={data.site.siteMetadata.menuItems}
+      />
+      <main>{children}</main>
+      <Footer
+        logo={data.file.childImageSharp.fixed}
+        siteDescription={data.site.siteMetadata.description}
+        siteAuthor={data.site.siteMetadata.author}
+        navigationItems={data.site.siteMetadata.menuItems}
+      />
     </>
   )
 }

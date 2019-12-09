@@ -5,16 +5,16 @@ import Image from "gatsby-image"
 //This guy shouldn't know about frontmatter
 const ImageText = ({ image, content, mirrored }) => {
   return mirrored ? (
-    <ImageTextWrapper>
+    <ImageTextWrapper wrapReverse>
       <StyledImage fluid={image} />
       <Content {...content} />
     </ImageTextWrapper>
   ) : (
-    <ImageTextWrapper>
-      <Content {...content} />
-      <StyledImage fluid={image} />
-    </ImageTextWrapper>
-  )
+      <ImageTextWrapper>
+        <Content {...content} />
+        <StyledImage fluid={image} />
+      </ImageTextWrapper>
+    )
 }
 
 const Content = ({ frontmatter, html }) => {
@@ -32,24 +32,25 @@ const Content = ({ frontmatter, html }) => {
 const ImageTextWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
-  align-items: flex-start;
-  margin: 2rem;
-  flex-flow: row wrap;
+  align-items: center;
+  margin: 5%;
+  flex-wrap: ${props => props.wrapReverse ? "wrap-reverse" : "wrap"};
 
   > * {
     margin: 0 2vw 5vh 2vw;
+    flex-grow:1;
   }
 `
 
 const StyledImage = styled(Image)`
-  height: ${props => props.height || "30vh"};
-  width: ${props => props.width || "40rem"};
-  min-width: 10rem;
+  height: ${props => props.height || "40vh"};
+  width: ${props => props.width || "40%"};
+  min-width: 300px;
 `
 
 const ContentContainer = styled.div`
-  min-width: 10rem;
-  width: 40rem;
+  min-width: 300px;
+  width: 40%;
 `
 
 export default ImageText

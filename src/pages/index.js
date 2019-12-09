@@ -13,7 +13,7 @@ const IndexPage = ({ data }) => {
       <SEO title="Home" />
       <HeroImage
         fluid={images.find(image => image.fluid.src.includes("hero")).fluid}
-        height="50vw"
+        height="75vh"
       >
         <h1>Croatian Vines</h1>
       </HeroImage>

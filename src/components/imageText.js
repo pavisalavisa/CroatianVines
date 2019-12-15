@@ -10,20 +10,18 @@ const ImageText = ({ image, content, mirrored }) => {
       <Content {...content} />
     </ImageTextWrapper>
   ) : (
-      <ImageTextWrapper>
-        <Content {...content} />
-        <StyledImage fluid={image} />
-      </ImageTextWrapper>
-    )
+    <ImageTextWrapper>
+      <Content {...content} />
+      <StyledImage fluid={image} />
+    </ImageTextWrapper>
+  )
 }
 
 const Content = ({ frontmatter, html }) => {
-  console.log(frontmatter)
-  console.log(html)
   return (
     <ContentContainer>
       <h1>{frontmatter.title}</h1>
-      <p>{html}</p>
+      <p>{frontmatter.content}</p>
       <p>{frontmatter.subscript}</p>
     </ContentContainer>
   )
@@ -33,12 +31,11 @@ const ImageTextWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin: 5%;
-  flex-wrap: ${props => props.wrapReverse ? "wrap-reverse" : "wrap"};
+  flex-wrap: ${props => (props.wrapReverse ? "wrap-reverse" : "wrap")};
 
   > * {
-    margin: 0 2vw 5vh 2vw;
-    flex-grow:1;
+    flex-grow: 1;
+    margin: 5%;
   }
 `
 

@@ -8,6 +8,7 @@ const Explore = () => (
   <Layout>
     <SEO title="Explore" />
     <h1>Hello from the explore page</h1>
+    <p></p>
     <Link to="/">Go back to the homepage</Link>
   </Layout>
 )

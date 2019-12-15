@@ -3,6 +3,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import HeroImage from "../components/heroImage"
 import ImageText from "../components/imageText"
+import LabeledText from "../components/common/labeledText"
 
 const IndexPage = ({ data }) => {
   const images = data.images.nodes.map(node => node.childImageSharp)
@@ -13,9 +14,9 @@ const IndexPage = ({ data }) => {
       <SEO title="Home" />
       <HeroImage
         fluid={images.find(image => image.fluid.src.includes("hero")).fluid}
-        height="75vh"
+        height="70vh"
       >
-        <h1>Croatian Vines</h1>
+        <LabeledText text={"Tell us about yourself"} />
       </HeroImage>
       <ImageText
         image={images.find(image => image.fluid.src.includes("awards")).fluid}
@@ -64,6 +65,7 @@ export const query = graphql`
         frontmatter {
           subscript
           title
+          content
         }
       }
     }

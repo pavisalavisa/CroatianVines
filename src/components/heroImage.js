@@ -18,7 +18,7 @@ const HeroImageWrapper = styled.div`
 `
 
 const Overlay = styled.div`
-  width: 80%;
+  width: 90%;
   text-align: center;
   margin: 0px auto;
   position: absolute;

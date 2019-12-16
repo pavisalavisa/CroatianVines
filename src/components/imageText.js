@@ -10,14 +10,14 @@ const ImageText = ({ image, content, mirrored }) => {
       <Content {...content} />
     </ImageTextWrapper>
   ) : (
-    <ImageTextWrapper>
-      <Content {...content} />
-      <StyledImage fluid={image} />
-    </ImageTextWrapper>
-  )
+      <ImageTextWrapper>
+        <Content {...content} />
+        <StyledImage fluid={image} />
+      </ImageTextWrapper>
+    )
 }
 
-const Content = ({ frontmatter, html }) => {
+const Content = ({ frontmatter }) => {
   return (
     <ContentContainer>
       <h1>{frontmatter.title}</h1>

@@ -16,7 +16,7 @@ const IndexPage = ({ data }) => {
         fluid={images.find(image => image.fluid.src.includes("hero")).fluid}
         height="70vh"
       >
-        <LabeledText text={"Tell us about yourself"} />
+        <LabeledText text={"Tell us about yourself"} width="100%" />
       </HeroImage>
       <ImageText
         image={images.find(image => image.fluid.src.includes("awards")).fluid}

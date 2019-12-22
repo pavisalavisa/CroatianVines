@@ -15,8 +15,6 @@ const Learn = ({ data }) => {
   const miniStepContents = data.miniStepContents.nodes
   const contents = data.contents.nodes
 
-  console.log('Contents are:')
-  console.log(data.winery.childImageSharp)
   return (
     <Layout>
       <SEO title="Learn" />
@@ -66,8 +64,12 @@ const Learn = ({ data }) => {
       <LabeledText text="Find out more" margin="0 5vw 0 5vw" />
       <p>Our winemakers are eager to see you. Allow them to share their secrets with you.
 Book a winery tour with us!</p>
+      <WinerySuggestions>
+        <MiniWineryCard image={data.winery.childImageSharp.fixed} name="Matusko" description="loremipsume" />
+        <MiniWineryCard image={data.winery.childImageSharp.fixed} name="Matusko" description="loremipsume" />
+        <MiniWineryCard image={data.winery.childImageSharp.fixed} name="Matusko" description="loremipsume" />
+      </WinerySuggestions>
       {/* TODO: Get this from airtable, this is prone to change unliek other static content */}
-      <MiniWineryCard image={data.winery.childImageSharp.fixed} name="Matusko" description="loremipsume" />
     </Layout>
   )
 }
@@ -75,12 +77,14 @@ Book a winery tour with us!</p>
 const WinemakingProcessSteps = styled(FlexRow)`
   /* TODO: make responsive */
   > * {
-    /* margin: 5%; */
+    width:250px;
+    margin: 2rem 5%;
     flex-grow: 1;
   }
+  flex-wrap: wrap;
+
   /* TODO: fine tune this */
   padding-bottom: 2rem;
-  margin: 2rem 5%;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 `
 
@@ -101,6 +105,13 @@ const AnchorLink = styled.a`
 const RoundImageWithBorder = styled(Image)`
   border-radius: 50%;
   border: 1px solid rgba(0, 0, 0, 0.3);
+`
+
+const WinerySuggestions = styled(FlexRow)`
+  justify-content:space-around;
+  flex-wrap:wrap;
+
+  margin: 2rem 5%;
 `
 
 export const query = graphql`
@@ -154,7 +165,7 @@ export const query = graphql`
 
     winery: file(relativePath: {regex: "/winery/"}) {
       childImageSharp {
-        fixed (width:440 height:275) {
+        fixed (width:350 height:220) {
           ...GatsbyImageSharpFixed
         }
       }

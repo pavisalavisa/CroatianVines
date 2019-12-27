@@ -6,7 +6,7 @@ import Image from "gatsby-image"
 import { Link } from "gatsby"
 
 const StyledFooter = styled.footer`
-marginBottom:1.45rem;
+  margin-bottom:1.45rem;
 `
 const SocialMediaContainer = styled.div`
 `
@@ -33,7 +33,7 @@ const NavigationItemGroup = ({ items }) =>
     <FlexRow>
       {items.map(menuItem => (
         <StyledMenuItem key={items.indexOf(menuItem)} to={menuItem.path}>
-          {menuItem.title.toUpperCase()}
+          {menuItem.text.toUpperCase()}
         </StyledMenuItem>)
       )}
     </FlexRow>

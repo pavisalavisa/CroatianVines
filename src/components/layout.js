@@ -14,8 +14,9 @@ const Layout = ({ children }) => {
           description
           author
           menuItems {
-            title
+            text
             path
+            partiallyActive
           }
         }
       }
@@ -24,7 +25,7 @@ const Layout = ({ children }) => {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
-          fixed(width: 128, height: 60) {
+          fixed(width: 128, height: 50) {
             ...GatsbyImageSharpFixed
           }
         }

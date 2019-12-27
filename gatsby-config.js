@@ -5,24 +5,29 @@ module.exports = {
     author: `@KristicevicAntonio`,
     menuItems: [
       {
-        title: "Home",
+        text: "Home",
         path: "/",
+        partiallyActive: true,
       },
       {
-        title: "Explore",
+        text: "Explore",
         path: "/explore",
+        partiallyActive: true,
       },
       {
-        title: "Learn",
+        text: "Learn",
         path: "/learn",
+        partiallyActive: true,
       },
       {
-        title: "Experience",
+        text: "Experience",
         path: "/experience",
+        partiallyActive: true,
       },
       {
-        title: "Reviews",
+        text: "Reviews",
         path: "/reviews",
+        partiallyActive: true,
       },
     ],
   },

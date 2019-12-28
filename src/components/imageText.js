@@ -1,8 +1,9 @@
 import React from "react"
 import styled from "styled-components"
 import Image from "gatsby-image"
+import { SubscriptParagraph } from "../components/common/paragraphs"
 
-//This guy shouldn't know about frontmatter
+//This guy shouldn't know žžđabout frontmatter
 const ImageText = ({ image, content, mirrored }) => {
   return mirrored ? (
     <ImageTextWrapper wrapReverse>
@@ -22,10 +23,17 @@ const Content = ({ frontmatter }) => {
     <ContentContainer>
       <h1>{frontmatter.title}</h1>
       <p>{frontmatter.content}</p>
-      <p>{frontmatter.subscript}</p>
+      <SubscriptContainer>
+        <SubscriptParagraph>{frontmatter.subscript}</SubscriptParagraph>
+      </SubscriptContainer>
     </ContentContainer>
   )
 }
+
+const SubscriptContainer = styled.div`
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0,0,0,0.3);
+`
 
 const ImageTextWrapper = styled.div`
   display: flex;
@@ -35,7 +43,7 @@ const ImageTextWrapper = styled.div`
 
   > * {
     flex-grow: 1;
-    margin: 5%;
+    margin: 2rem 3rem;
   }
 `
 

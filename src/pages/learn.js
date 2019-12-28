@@ -8,6 +8,7 @@ import FlexRow from "../components/common/container"
 import styled from "styled-components"
 import ImageText from "../components/imageText"
 import MiniWineryCard from "../components/miniWineryCard"
+import {CenteredParagraph} from "../components/common/paragraphs"
 
 const Learn = ({ data }) => {
   const images = data.images.nodes
@@ -62,8 +63,8 @@ const Learn = ({ data }) => {
         )}
       />
       <LabeledText text="Find out more" margin="0 5vw 0 5vw" />
-      <p>Our winemakers are eager to see you. Allow them to share their secrets with you.
-Book a winery tour with us!</p>
+      <CenteredParagraph>Our winemakers are eager to see you. Allow them to share their secrets with you.
+Book a winery tour with us!</CenteredParagraph>
       <WinerySuggestions>
         <MiniWineryCard image={data.winery.childImageSharp.fixed} name="Matusko" description="loremipsume" />
         <MiniWineryCard image={data.winery.childImageSharp.fixed} name="Matusko" description="loremipsume" />
@@ -108,7 +109,7 @@ const RoundImageWithBorder = styled(Image)`
 `
 
 const WinerySuggestions = styled(FlexRow)`
-  justify-content:space-around;
+  justify-content:space-between;
   flex-wrap:wrap;
 
   margin: 2rem 5%;

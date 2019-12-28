@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
-import Header from "./header"
+import Navigation from "./navigation"
 import Footer from "./footer"
 
 const Layout = ({ children }) => {
@@ -23,8 +23,6 @@ const Layout = ({ children }) => {
 
       file(relativePath: { eq: "icon.png" }) {
         childImageSharp {
-          # Specify the image processing specifications right in the query.
-          # Makes it trivial to update as your page's design changes.
           fixed(width: 128, height: 50) {
             ...GatsbyImageSharpFixed
           }
@@ -35,7 +33,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header
+      <Navigation
         logo={data.file.childImageSharp.fixed}
         menuItems={data.site.siteMetadata.menuItems}
       />

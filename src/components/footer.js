@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"
 import React from "react"
 import styled from "styled-components"
-import FlexRow from "./common/container"
+import { FlexRow, underlinedContainerStyle } from "./common/container"
 import Image from "gatsby-image"
 import { Link } from "gatsby"
 
@@ -11,12 +11,9 @@ const StyledFooter = styled.footer`
 const SocialMediaContainer = styled.div`
 `
 const StyledMenuItem = styled(props => <Link {...props} />)`
+  ${underlinedContainerStyle}
   color: #5B0B0B;
   padding:0.5rem;
-  &:hover {
-    border-bottom:3px solid #5B0B0B;
-    padding:-3px;
-  }
   text-decoration:none;
 `;
 const CopyrightContainer = styled.div`

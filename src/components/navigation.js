@@ -7,7 +7,7 @@ import React from "react"
 import styled from "styled-components"
 import ImageLink from "./common/imageLink"
 import StyledButton from "./common/button"
-import FlexRow from "./common/container"
+import { FlexRow, underlinedContainerStyle } from "./common/container"
 import more from "../images/more.svg"
 
 const StyledHeader = styled.header`
@@ -16,13 +16,11 @@ const StyledHeader = styled.header`
   padding: 0;
 `
 
-const StyledMenuItem = styled(props => <Link {...props} />)`
+const StyledMenuItem = styled(Link)`
+  ${underlinedContainerStyle}
+
   color: #5B0B0B;
   padding:0.5rem;
-  &:hover {
-    border-bottom:3px solid #5B0B0B;
-    padding:-3px;
-  }
   text-decoration:none;
 `;
 
@@ -89,10 +87,9 @@ const VisibleItems = ({ visibleItems }) => (
   visibleItems.map(menuItem => (
     <StyledMenuItem key={visibleItems.indexOf(menuItem)} to={menuItem.path}>
       {menuItem.text.toUpperCase()}
-    </StyledMenuItem>)
-  )
+    </StyledMenuItem>
+  ))
 )
-
 
 const HiddenItems = ({
   menu,
@@ -102,7 +99,7 @@ const HiddenItems = ({
   zIndex = 999,
 }) => {
   const { innerBorderRef } = useOnOutsideEvent(handleOutsideClick)
-  
+
   return (
     <HiddenItemsContainer ref={innerBorderRef} menu={menu} minWidth={minWidth} spaceForTriangle={spaceForTriangle} zIndex={zIndex}>
       <Triangle />
@@ -162,7 +159,7 @@ const AccountSection = () => (
 )
 
 
-const Header = ({ logo, menuItems }) => (
+const Navigation = ({ logo, menuItems }) => (
   <StyledHeader>
     <FlexRow>
       <ImageLink to="/" imagePath={logo} />
@@ -171,12 +168,12 @@ const Header = ({ logo, menuItems }) => (
   </StyledHeader>
 )
 
-Header.propTypes = {
+Navigation.propTypes = {
   siteTitle: PropTypes.string,
 }
 
-Header.defaultProps = {
+Navigation.defaultProps = {
   siteTitle: ``,
 }
 
-export default Header
+export default Navigation

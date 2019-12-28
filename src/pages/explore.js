@@ -1,5 +1,4 @@
 import React from "react"
-import { Link } from "gatsby"
 import HeroImage from "../components/heroImage"
 import LabeledText from "../components/common/labeledText"
 

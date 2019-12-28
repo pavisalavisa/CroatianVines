@@ -8,14 +8,14 @@ import FlexRow from "../components/common/container"
 import styled from "styled-components"
 import ImageText from "../components/imageText"
 import MiniWineryCard from "../components/miniWineryCard"
-import {CenteredParagraph} from "../components/common/paragraphs"
+import { CenteredParagraph } from "../components/common/paragraphs"
 
 const Learn = ({ data }) => {
   const images = data.images.nodes
   const icons = data.icons.nodes
   const miniStepContents = data.miniStepContents.nodes
   const contents = data.contents.nodes
-  const heroImage= data.heroImage.childImageSharp
+  const heroImage = data.heroImage.childImageSharp
 
   return (
     <Layout>
@@ -28,7 +28,7 @@ const Learn = ({ data }) => {
       </HeroImage>
 
       <WinemakingProcessSteps>
-        {miniStepContents.map(miniStep => (
+        {miniStepContents.sort((a, b) => a.frontmatter.ordinalNumber - b.frontmatter.ordinalNumber).map(miniStep => (
           <MiniStepInfo
             key={miniStep.frontmatter.ordinalNumber}
             title={miniStep.frontmatter.title}
@@ -71,13 +71,12 @@ Book a winery tour with us!</CenteredParagraph>
         <MiniWineryCard image={data.winery.childImageSharp.fixed} name="Matusko" description="loremipsume" />
         <MiniWineryCard image={data.winery.childImageSharp.fixed} name="Matusko" description="loremipsume" />
       </WinerySuggestions>
-      {/* TODO: Get this from airtable, this is prone to change unliek other static content */}
+      {/* TODO: Get this from airtable, this is prone to change unlike other static content */}
     </Layout>
   )
 }
 
 const WinemakingProcessSteps = styled(FlexRow)`
-  /* TODO: make responsive */
   > * {
     width:250px;
     margin: 2rem 5%;
@@ -85,7 +84,6 @@ const WinemakingProcessSteps = styled(FlexRow)`
   }
   flex-wrap: wrap;
 
-  /* TODO: fine tune this */
   padding-bottom: 2rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 `

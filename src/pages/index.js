@@ -8,13 +8,14 @@ import LabeledText from "../components/common/labeledText"
 const IndexPage = ({ data }) => {
   const images = data.images.nodes.map(node => node.childImageSharp)
   const contents = data.contents.nodes
+  const heroImage = data.heroImage.childImageSharp
 
   return (
     <Layout>
       <SEO title="Home" />
       <HeroImage
-        fluid={images.find(image => image.fluid.src.includes("hero")).fluid}
-        height="70vh"
+        fluid={heroImage.fixed}
+        height="800px"
       >
         <LabeledText text={"Tell us about yourself"} width="100%" />
       </HeroImage>
@@ -45,6 +46,14 @@ const IndexPage = ({ data }) => {
 
 export const query = graphql`
   {
+    heroImage: file(relativePath: {in: "home-heroImage.jpg"}) {
+      childImageSharp {
+        fixed(quality: 100, height: 2199, width: 3298) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+
     images: allFile(
       filter: { relativePath: { regex: "/home-[a-zA-Z0-9]*.(png|jpg|gif)/" } }
     ) {

@@ -15,13 +15,14 @@ const Learn = ({ data }) => {
   const icons = data.icons.nodes
   const miniStepContents = data.miniStepContents.nodes
   const contents = data.contents.nodes
+  const heroImage= data.heroImage.childImageSharp
 
   return (
     <Layout>
       <SEO title="Learn" />
       <HeroImage
-        fluid={images.find(image => image.fluid.src.includes("hero")).fluid}
-        height="37.5vh"
+        fluid={heroImage.fixed}
+        height="400px"
       >
         <LabeledText text={"How do we do it?"} width="100%" />
       </HeroImage>
@@ -109,14 +110,21 @@ const RoundImageWithBorder = styled(Image)`
 `
 
 const WinerySuggestions = styled(FlexRow)`
-  justify-content:space-between;
+  justify-content:space-around;
   flex-wrap:wrap;
-
-  margin: 2rem 5%;
+  margin: 2rem 1rem;
 `
 
 export const query = graphql`
   {
+    heroImage: file(relativePath: {in: "learn-heroImage.jpg"}) {
+      childImageSharp {
+        fixed(quality: 100, height: 2800, width: 4200) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+
     images: allImageSharp(
       filter: {
         fixed: { src: { regex: "/learn-[a-zA-Z0-9]*Image.(png|jpg|gif)/" } }

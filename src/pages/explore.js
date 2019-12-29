@@ -6,9 +6,14 @@ import SearchBox from "../components/common/searchBox"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import VineService from "../services/vineService"
-import VineCard from "../components/vineCard"
+import WineCard from "../components/wineCard"
+import Divider from "../components/common/divider"
+import FlexRow from "../components/common/container";
 
-const FeaturedVinesContainer = styled.div``
+const FeaturedVinesContainer = styled.div`
+  margin:0 10%;
+  
+`
 const FilteredVinesContainer = styled.div``
 
 const Explore = ({ data }) => {
@@ -40,11 +45,17 @@ const Explore = ({ data }) => {
         <LabeledText text={"Explore our wine selection"} width="100%" />
       </HeroImage>
       <SearchBox hint="Search for vines" buttonLabel="Find a wine" onSearch={onSearch} />
+      <Divider />
       <FeaturedVinesContainer>
-        {!!featuredVines ? featuredVines.map(x => <VineCard {...x} />) : null}
+        <h2>Featured vines:</h2>
+        <p>Lose yourself in the finest of Croatian wines. Four distinct climates present in Croatia make the pallet of wines vivid and picturesque. Check out what our editors loved the most in the past month:</p>
+        <FlexRow>
+          {!!featuredVines ? featuredVines.map(x => <WineCard {...x} />) : null}
+        </FlexRow>
       </FeaturedVinesContainer>
+      <Divider />
       <FilteredVinesContainer>
-        {!!filteredVines ? filteredVines.map(x => <VineCard {...x} />) : null}
+        {!!filteredVines ? filteredVines.map(x => <WineCard {...x} />) : null}
       </FilteredVinesContainer>
     </Layout>
   )

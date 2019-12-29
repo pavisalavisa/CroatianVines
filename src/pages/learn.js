@@ -9,6 +9,7 @@ import styled from "styled-components"
 import ImageText from "../components/imageText"
 import MiniWineryCard from "../components/miniWineryCard"
 import { CenteredParagraph } from "../components/common/paragraphs"
+import Divider from "../components/common/divider"
 
 const Learn = ({ data }) => {
   const images = data.images.nodes
@@ -43,6 +44,7 @@ const Learn = ({ data }) => {
           />
         ))}
       </WinemakingProcessSteps>
+      <Divider />
       <ImageText
         mirrored
         image={images.find(image => image.fluid.src.includes("step1Image")).fluid}
@@ -85,7 +87,6 @@ const WinemakingProcessSteps = styled(FlexRow)`
   flex-wrap: wrap;
 
   padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 `
 
 const MiniStepInfo = ({ icon, title, content }) => (

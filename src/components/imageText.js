@@ -41,21 +41,29 @@ const ImageTextWrapper = styled.div`
   align-items: center;
   flex-wrap: ${props => (props.wrapReverse ? "wrap-reverse" : "wrap")};
 
-  > * {
-    flex-grow: 1;
-    margin: 2rem 3rem;
+  > *{
+    flex-grow:1;
+  }
+
+  & > :first-child{
+    margin: 50px 40px 50px 0;
+  }
+  & > :last-child{
+    margin:50px 50px 0 40px;
   }
 `
 
 const StyledImage = styled(Image)`
-  height: ${props => props.height || "40vh"};
-  width: ${props => props.width || "40%"};
+  height: ${props => props.height || "400px"};
+  width: ${props => props.width || "600px"};
   min-width: 300px;
+  max-width:600px;
 `
 
 const ContentContainer = styled.div`
   min-width: 300px;
-  width: 40%;
+  max-width: 600px;
+  height:400px;
 `
 
 export default ImageText

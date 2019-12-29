@@ -15,7 +15,7 @@ const IndexPage = ({ data }) => {
       <SEO title="Home" />
       <HeroImage
         fluid={heroImage.fixed}
-        height="800px"
+        height="80vh"
       >
         <LabeledText text={"Tell us about yourself"} width="100%" />
       </HeroImage>

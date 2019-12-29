@@ -1,4 +1,4 @@
-import styled,{ css } from "styled-components"
+import styled, { css } from "styled-components"
 
 export const FlexRow = styled.div`
   display: flex;
@@ -35,6 +35,22 @@ export const underlinedContainerStyle = css`
     left:0;
     right:0;
   }
+`
+
+export const hoverAnimationStyle = css`
+    display: inline-block;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+
+    &:hover, &:focus, &:active {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+    }
 `
 
 export default FlexRow;

@@ -1,10 +1,9 @@
 import React from "react";
 import styled from "styled-components"
 
-
-const LabeledText = ({ text, margin, width }) =>
+const LabeledText = ({ margin, width, text, textRef }) =>
     (
-        <TextContainer margin={margin} width={width}>
+        <TextContainer ref={textRef} margin={margin} width={width}>
             <StyledText>
                 {text}
             </StyledText>

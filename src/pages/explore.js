@@ -9,6 +9,7 @@ import WineCard from "../components/wineCard"
 import Divider from "../components/common/divider"
 import { searchWines } from "../utilities/fuzzySearch"
 import useDebounce from "../hooks/use-debounce"
+import useScroll from "../hooks/use-scroll"
 
 const FeaturedVinesContainer = styled.div`
   margin:50px 10% 50px 10%;  
@@ -32,6 +33,7 @@ const Explore = ({ data }) => {
   const [currentSearchValue, setCurrentSearchValue] = useState('')
   const [filteredWines, setFilteredWines] = useState(null)
   const debouncedSearchTerm = useDebounce(currentSearchValue, 500)
+  const { elementRef, scroll } = useScroll()
 
   useEffect(
     () => {
@@ -59,8 +61,8 @@ const Explore = ({ data }) => {
         </WineCardsGrid>
       </FeaturedVinesContainer>
       <Divider />
-      <SearchBox hint="Search for vines (e.g. Istra)" buttonLabel="Find a wine" onSearch={setCurrentSearchValue} />
-      <LabeledText text="Search results" margin="50px 5%" />
+      <SearchBox hint="Search for vines (e.g. Istria)" onSearch={setCurrentSearchValue} onFocus={scroll} />
+      <LabeledText textRef={elementRef} text="Search results" margin="50px 5%" />
       <FilteredVinesContainer>
         {!!filteredWines ?
           <WineCardsGrid>
@@ -76,47 +78,35 @@ const Explore = ({ data }) => {
 
 export const query = graphql`
 {
-  heroImage: file(relativePath: { in: "explore-heroImage.jpg" }) {
+  heroImage: file(relativePath: {in: "explore-heroImage.jpg"}) {
     childImageSharp {
       fixed(quality: 100, height: 1333, width: 2000) {
-          ...GatsbyImageSharpFixed
+        ...GatsbyImageSharpFixed
       }
     }
   }
-
-  images: allImageSharp(
-    filter: {
-      fixed: { src: { regex: "/explore-[a-zA-Z0-9]*Image.(png|jpg|gif)/" } }
-    }
-  ) {
+  images: allImageSharp(filter: {fixed: {src: {regex: "/explore-[a-zA-Z0-9]*Image.(png|jpg|gif)/"}}}) {
     nodes {
       fluid {
-          ...GatsbyImageSharpFluid
+        ...GatsbyImageSharpFluid
       }
     }
   }
-
-  icons: allImageSharp(
-    filter: {
-      fixed: { src: { regex: "/explore-[a-zA-Z0-9]*Icon.(png|jpg|gif)/" } }
-    }
-  ) {
+  icons: allImageSharp(filter: {fixed: {src: {regex: "/explore-[a-zA-Z0-9]*Icon.(png|jpg|gif)/"}}}) {
     nodes {
       fixed(width: 110, height: 110) {
-          ...GatsbyImageSharpFixed
+        ...GatsbyImageSharpFixed
         originalName
       }
     }
   }
-
-  winery: file(relativePath: { regex: "/winery/" }) {
+  winery: file(relativePath: {regex: "/winery/"}) {
     childImageSharp {
-      fixed(width: 350 height: 220) {
-          ...GatsbyImageSharpFixed
+      fixed(width: 350, height: 220) {
+        ...GatsbyImageSharpFixed
       }
     }
   }
-
   allWines: allAirtable(filter: {table: {eq: "Wines"}}) {
     nodes {
       data {
@@ -132,7 +122,6 @@ export const query = graphql`
       }
     }
   }
-
   featuredWines: allAirtable(filter: {data: {IsFeatured: {eq: true}}, table: {eq: "Wines"}}) {
     nodes {
       data {
@@ -148,7 +137,6 @@ export const query = graphql`
       }
     }
   }
-
   site {
     siteMetadata {
       title

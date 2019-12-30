@@ -19,7 +19,7 @@ const StyledInput = styled.input`
     font-size:${props => props.fontSize ? props.fontSize : "medium"};
 `
 
-const SearchBox = ({ hint, onSearch }) => {
+const SearchBox = ({ hint, onSearch, onFocus }) => {
     const [inputValue, setInputValue] = useState('')
 
     const handleInputChange = (event) => {
@@ -37,7 +37,8 @@ const SearchBox = ({ hint, onSearch }) => {
             value={inputValue}
             onChange={handleInputChange}
             fontSize="xx-large"
-            width="800px" />
+            width="800px"
+            onFocus={onFocus} />
     </SearchBoxContainer>
 }
 

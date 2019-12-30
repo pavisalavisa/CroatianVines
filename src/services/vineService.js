@@ -1,5 +1,4 @@
 const getFeaturedVines = () => {
-    console.log('Getting featured vines')
     //TODO: actually go and get it from the API
     return Promise.resolve([
         { 'name': 'Dingac', 'description': 'Very gut', 'image': 'someLink' },
@@ -9,7 +8,6 @@ const getFeaturedVines = () => {
 
 const getVines = (name) => {
 
-    console.log(`Getting vine with name ${name}.`)
     //TODO: actually go and get it from the API
     return Promise.resolve([{ 'name': 'Zinfandel', 'description': 'Very gut', 'image': 'someLink' },
     { 'name': 'Pošip', 'description': 'Very well', 'image': 'someLink' },

@@ -72,5 +72,23 @@ module.exports = {
         pathToConfigModule: `src/utilities/typography`,
       },
     },
+    {
+      resolve: `gatsby-source-airtable`,
+      options: {
+        apiKey: process.env.AIRTABLE_API_KEY, // may instead specify via env, see below
+        tables: [
+          {
+            baseId: `app1YxhjCyOseAVb1`,
+            tableName: `Wines`,
+            mapping: { image: `fileNode` }, // optional, e.g. "text/markdown", "fileNode"
+          },
+          {
+            baseId: `app1YxhjCyOseAVb1`,
+            tableName: `Wineries`,
+            mapping: { image: `fileNode` },
+          }
+        ]
+      }
+    }
   ],
 }

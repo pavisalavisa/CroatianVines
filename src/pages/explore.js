@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import HeroImage from "../components/heroImage"
 import LabeledText from "../components/common/labeledText"
@@ -8,26 +8,24 @@ import SEO from "../components/seo"
 import VineService from "../services/vineService"
 import WineCard from "../components/wineCard"
 import Divider from "../components/common/divider"
-import FlexRow from "../components/common/container";
 
 const FeaturedVinesContainer = styled.div`
-  margin:0 10%;
-  
+  margin:0 10%;  
 `
 const FilteredVinesContainer = styled.div``
 
+const WineCardsGrid = styled.div`
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-gap:80px;
+  justify-items:center;
+`
+
 const Explore = ({ data }) => {
   const heroImage = data.heroImage.childImageSharp
+  const featuredWines = data.featuredWines.nodes
   const [currentSearchValue, setCurrentSearchValue] = useState('')
-  const [filteredVines, setFilteredVines] = useState([])
-  const [featuredVines, setFeaturedVines] = useState([])
-
-  useEffect(() => {
-    (async () => {
-      const vines = await VineService.getFeaturedVines()
-      setFeaturedVines(vines)
-    })();
-  }, [])
+  const [filteredVines, setFilteredVines] = useState(null)
 
   const onSearch = async (searchValue) => {
     setCurrentSearchValue(searchValue)
@@ -49,67 +47,100 @@ const Explore = ({ data }) => {
       <FeaturedVinesContainer>
         <h2>Featured vines:</h2>
         <p>Lose yourself in the finest of Croatian wines. Four distinct climates present in Croatia make the pallet of wines vivid and picturesque. Check out what our editors loved the most in the past month:</p>
-        <FlexRow>
-          {!!featuredVines ? featuredVines.map(x => <WineCard {...x} />) : null}
-        </FlexRow>
+        <WineCardsGrid>
+          {!!featuredWines ? featuredWines.map(x => <WineCard name={x.data.Name} description={x.data.Description} image={x.data.Image[0].thumbnails.large.url} />) : null}
+        </WineCardsGrid>
       </FeaturedVinesContainer>
       <Divider />
       <FilteredVinesContainer>
-        {!!filteredVines ? filteredVines.map(x => <WineCard {...x} />) : null}
+        {currentSearchValue != '' ? <LabeledText text="Search results" /> : null}
+        {!!filteredVines ? filteredVines.map(x => <WineCard name={x.data.Name} description={x.data.Description} image={x.data.Image[0].thumbnails.large.url} />) : null}
       </FilteredVinesContainer>
     </Layout>
   )
 }
 
 export const query = graphql`
-  {
-    heroImage: file(relativePath: {in: "explore-heroImage.jpg"}) {
-      childImageSharp {
-        fixed(quality: 100, height: 1333, width: 2000) {
+{
+  heroImage: file(relativePath: { in: "explore-heroImage.jpg" }) {
+    childImageSharp {
+      fixed(quality: 100, height: 1333, width: 2000) {
           ...GatsbyImageSharpFixed
-        }
-      }
-    }
-    
-    images: allImageSharp(
-      filter: {
-        fixed: { src: { regex: "/explore-[a-zA-Z0-9]*Image.(png|jpg|gif)/" } }
-      }
-    ) {
-      nodes {
-        fluid {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-
-    icons: allImageSharp(
-      filter: {
-        fixed: { src: { regex: "/explore-[a-zA-Z0-9]*Icon.(png|jpg|gif)/" } }
-      }
-    ) {
-      nodes {
-        fixed(width: 110, height: 110) {
-          ...GatsbyImageSharpFixed
-          originalName
-        }
-      }
-    }
-
-    winery: file(relativePath: {regex: "/winery/"}) {
-      childImageSharp {
-        fixed (width:350 height:220) {
-          ...GatsbyImageSharpFixed
-        }
-      }
-    }
-
-    site {
-      siteMetadata {
-        title
       }
     }
   }
+
+  images: allImageSharp(
+    filter: {
+      fixed: { src: { regex: "/explore-[a-zA-Z0-9]*Image.(png|jpg|gif)/" } }
+    }
+  ) {
+    nodes {
+      fluid {
+          ...GatsbyImageSharpFluid
+      }
+    }
+  }
+
+  icons: allImageSharp(
+    filter: {
+      fixed: { src: { regex: "/explore-[a-zA-Z0-9]*Icon.(png|jpg|gif)/" } }
+    }
+  ) {
+    nodes {
+      fixed(width: 110, height: 110) {
+          ...GatsbyImageSharpFixed
+        originalName
+      }
+    }
+  }
+
+  winery: file(relativePath: { regex: "/winery/" }) {
+    childImageSharp {
+      fixed(width: 350 height: 220) {
+          ...GatsbyImageSharpFixed
+      }
+    }
+  }
+
+  allWines: allAirtable(filter: {table: {eq: "Wines"}}) {
+    nodes {
+      data {
+        Name
+        Description
+        Image {
+          thumbnails {
+            large {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+
+  featuredWines: allAirtable(filter: {data: {IsFeatured: {eq: true}}, table: {eq: "Wines"}}) {
+    nodes {
+      data {
+        Name
+        Description
+        Image {
+          thumbnails {
+            large {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+
+  site {
+    siteMetadata {
+      title
+    }
+  }
+}
 `
 
 export default Explore

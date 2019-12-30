@@ -5,14 +5,16 @@ import LabeledText from "../components/common/labeledText"
 import SearchBox from "../components/common/searchBox"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import VineService from "../services/vineService"
 import WineCard from "../components/wineCard"
 import Divider from "../components/common/divider"
+import { searchWines } from "../utilities/fuzzySearch"
 
 const FeaturedVinesContainer = styled.div`
-  margin:0 10%;  
+  margin:50px 10% 50px 10%;  
 `
-const FilteredVinesContainer = styled.div``
+const FilteredVinesContainer = styled.div`
+  margin:50px 10% 50px 10%;  
+`
 
 const WineCardsGrid = styled.div`
   display:grid;
@@ -23,14 +25,18 @@ const WineCardsGrid = styled.div`
 
 const Explore = ({ data }) => {
   const heroImage = data.heroImage.childImageSharp
-  const featuredWines = data.featuredWines.nodes
+  const featuredWines = data.featuredWines.nodes.map(x => x.data)
+  const allWines = data.allWines.nodes.map(x => x.data)
+
   const [currentSearchValue, setCurrentSearchValue] = useState('')
   const [filteredVines, setFilteredVines] = useState(null)
 
-  const onSearch = async (searchValue) => {
+  const onSearch = (searchValue) => {
     setCurrentSearchValue(searchValue)
-    const vines = await VineService.getVines(currentSearchValue)
-    setFilteredVines(vines)
+
+    const wines = searchWines(allWines, searchValue)
+
+    setFilteredVines(wines)
   }
 
   return (
@@ -42,19 +48,24 @@ const Explore = ({ data }) => {
       >
         <LabeledText text={"Explore our wine selection"} width="100%" />
       </HeroImage>
-      <SearchBox hint="Search for vines" buttonLabel="Find a wine" onSearch={onSearch} />
-      <Divider />
       <FeaturedVinesContainer>
         <h2>Featured vines:</h2>
         <p>Lose yourself in the finest of Croatian wines. Four distinct climates present in Croatia make the pallet of wines vivid and picturesque. Check out what our editors loved the most in the past month:</p>
         <WineCardsGrid>
-          {!!featuredWines ? featuredWines.map(x => <WineCard name={x.data.Name} description={x.data.Description} image={x.data.Image[0].thumbnails.large.url} />) : null}
+          {!!featuredWines ? featuredWines.map(x => <WineCard name={x.Name} description={x.Description} image={x.Image[0].thumbnails.large.url} />) : null}
         </WineCardsGrid>
       </FeaturedVinesContainer>
       <Divider />
+      <SearchBox hint="Search for vines" buttonLabel="Find a wine" onSearch={onSearch} />
+      {currentSearchValue !== '' ? <LabeledText text="Search results" margin="50px 5%" /> : null}
       <FilteredVinesContainer>
-        {currentSearchValue != '' ? <LabeledText text="Search results" /> : null}
-        {!!filteredVines ? filteredVines.map(x => <WineCard name={x.data.Name} description={x.data.Description} image={x.data.Image[0].thumbnails.large.url} />) : null}
+        {!!filteredVines ?
+          <WineCardsGrid>
+            {filteredVines.map(x => <WineCard
+              name={x.Name}
+              description={x.Description}
+              image={x.Image[0].thumbnails.large.url} />)}
+          </WineCardsGrid> : null}
       </FilteredVinesContainer>
     </Layout>
   )

@@ -7,7 +7,7 @@ import StyledButton from "./button"
 const SearchBoxContainer = styled.div`
     display:flex;
     justify-content:center;
-    padding:10rem 0;
+    padding: 0;
 `
 
 const StyledInput = styled.input`

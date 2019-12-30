@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import HeroImage from "../components/heroImage"
 import LabeledText from "../components/common/labeledText"
@@ -8,6 +8,7 @@ import SEO from "../components/seo"
 import WineCard from "../components/wineCard"
 import Divider from "../components/common/divider"
 import { searchWines } from "../utilities/fuzzySearch"
+import useDebounce from "../hooks/use-debounce"
 
 const FeaturedVinesContainer = styled.div`
   margin:50px 10% 50px 10%;  
@@ -29,23 +30,25 @@ const Explore = ({ data }) => {
   const allWines = data.allWines.nodes.map(x => x.data)
 
   const [currentSearchValue, setCurrentSearchValue] = useState('')
-  const [filteredVines, setFilteredVines] = useState(null)
+  const [filteredWines, setFilteredWines] = useState(null)
+  const debouncedSearchTerm = useDebounce(currentSearchValue, 500)
 
-  const onSearch = (searchValue) => {
-    setCurrentSearchValue(searchValue)
-
-    const wines = searchWines(allWines, searchValue)
-
-    setFilteredVines(wines)
-  }
+  useEffect(
+    () => {
+      if (debouncedSearchTerm) {
+        const wines = searchWines(allWines, debouncedSearchTerm)
+        setFilteredWines(wines)
+      }
+      else {
+        setFilteredWines(allWines)
+      }
+    }, [debouncedSearchTerm]
+  )
 
   return (
     <Layout>
       <SEO title="Explore" />
-      <HeroImage
-        fluid={heroImage.fixed}
-        height="400px"
-      >
+      <HeroImage fluid={heroImage.fixed} height="400px">
         <LabeledText text={"Explore our wine selection"} width="100%" />
       </HeroImage>
       <FeaturedVinesContainer>
@@ -56,12 +59,12 @@ const Explore = ({ data }) => {
         </WineCardsGrid>
       </FeaturedVinesContainer>
       <Divider />
-      <SearchBox hint="Search for vines" buttonLabel="Find a wine" onSearch={onSearch} />
-      {currentSearchValue !== '' ? <LabeledText text="Search results" margin="50px 5%" /> : null}
+      <SearchBox hint="Search for vines (e.g. Istra)" buttonLabel="Find a wine" onSearch={setCurrentSearchValue} />
+      <LabeledText text="Search results" margin="50px 5%" />
       <FilteredVinesContainer>
-        {!!filteredVines ?
+        {!!filteredWines ?
           <WineCardsGrid>
-            {filteredVines.map(x => <WineCard
+            {filteredWines.map(x => <WineCard
               name={x.Name}
               description={x.Description}
               image={x.Image[0].thumbnails.large.url} />)}

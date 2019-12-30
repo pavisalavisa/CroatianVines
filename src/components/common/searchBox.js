@@ -2,8 +2,6 @@ import React from "react"
 import styled from "styled-components"
 import { useState } from "react"
 
-import StyledButton from "./button"
-
 const SearchBoxContainer = styled.div`
     display:flex;
     justify-content:center;
@@ -21,7 +19,7 @@ const StyledInput = styled.input`
     font-size:${props => props.fontSize ? props.fontSize : "medium"};
 `
 
-const SearchBox = ({ hint, buttonLabel, onSearch }) => {
+const SearchBox = ({ hint, onSearch }) => {
     const [inputValue, setInputValue] = useState('')
 
     const handleInputChange = (event) => {
@@ -29,10 +27,8 @@ const SearchBox = ({ hint, buttonLabel, onSearch }) => {
         const value = target.value
 
         setInputValue(value)
-    }
 
-    const handleSearchClick = (event) => {
-        onSearch(inputValue)
+        onSearch(value)
     }
 
     return <SearchBoxContainer>
@@ -42,11 +38,6 @@ const SearchBox = ({ hint, buttonLabel, onSearch }) => {
             onChange={handleInputChange}
             fontSize="xx-large"
             width="800px" />
-        <StyledButton onClick={handleSearchClick}
-            fontSize="xx-large"
-            toFront>
-            {buttonLabel}
-        </StyledButton>
     </SearchBoxContainer>
 }
 

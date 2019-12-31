@@ -4,14 +4,14 @@ import Image from "gatsby-image"
 import { SubscriptParagraph } from "../components/common/paragraphs"
 
 //This guy shouldn't know žžđabout frontmatter
-const ImageText = ({ image, content, mirrored }) => {
+const ImageText = ({ image, content, mirrored, imageTextRef }) => {
   return mirrored ? (
-    <ImageTextWrapper wrapReverse>
+    <ImageTextWrapper wrapReverse ref={imageTextRef}>
       <StyledImage fluid={image} />
       <Content {...content} />
     </ImageTextWrapper>
   ) : (
-      <ImageTextWrapper>
+      <ImageTextWrapper ref={imageTextRef}>
         <Content {...content} />
         <StyledImage fluid={image} />
       </ImageTextWrapper>

@@ -10,6 +10,7 @@ import ImageText from "../components/imageText"
 import MiniWineryCard from "../components/miniWineryCard"
 import { CenteredParagraph } from "../components/common/paragraphs"
 import Divider from "../components/common/divider"
+import useScroll from "../hooks/use-scroll"
 
 const Learn = ({ data }) => {
   const images = data.images.nodes
@@ -18,13 +19,12 @@ const Learn = ({ data }) => {
   const contents = data.contents.nodes
   const heroImage = data.heroImage.childImageSharp
 
+  const scrollSteps = [useScroll(), useScroll(), useScroll()]
+
   return (
     <Layout>
       <SEO title="Learn" />
-      <HeroImage
-        fluid={heroImage.fixed}
-        height="400px"
-      >
+      <HeroImage fluid={heroImage.fixed} height="400px" >
         <LabeledText text={"How do we do it?"} width="100%" />
       </HeroImage>
 
@@ -41,6 +41,7 @@ const Learn = ({ data }) => {
                 )
               ).fixed
             }
+            onLearnMoreClick={scrollSteps[miniStep.frontmatter.ordinalNumber - 1].scroll}
           />
         ))}
       </WinemakingProcessSteps>
@@ -48,22 +49,19 @@ const Learn = ({ data }) => {
       <ImageText
         mirrored
         image={images.find(image => image.fluid.src.includes("step1Image")).fluid}
-        content={contents.find(content =>
-          content.frontmatter.title.toLowerCase().includes("first")
-        )}
+        content={contents.find(content => content.frontmatter.title.toLowerCase().includes("first"))}
+        imageTextRef={scrollSteps[0].elementRef}
       />
       <ImageText
         image={images.find(image => image.fluid.src.includes("step2Image")).fluid}
-        content={contents.find(content =>
-          content.frontmatter.title.toLowerCase().includes("second")
-        )}
+        content={contents.find(content => content.frontmatter.title.toLowerCase().includes("second"))}
+        imageTextRef={scrollSteps[1].elementRef}
       />
       <ImageText
         mirrored
         image={images.find(image => image.fluid.src.includes("step3Image")).fluid}
-        content={contents.find(content =>
-          content.frontmatter.title.toLowerCase().includes("third")
-        )}
+        content={contents.find(content => content.frontmatter.title.toLowerCase().includes("third"))}
+        imageTextRef={scrollSteps[2].elementRef}
       />
       <LabeledText text="Find out more" margin="0 5vw 0 5vw" />
       <CenteredParagraph>Our winemakers are eager to see you. Allow them to share their secrets with you.
@@ -89,18 +87,19 @@ const WinemakingProcessSteps = styled(FlexRow)`
   padding-bottom: 2rem;
 `
 
-const MiniStepInfo = ({ icon, title, content }) => (
+const MiniStepInfo = ({ icon, title, content, onLearnMoreClick }) => (
   <div>
     <RoundImageWithBorder fixed={icon} />
     <h2>{title}</h2>
     <p>{content}</p>
-    <AnchorLink>Learn more</AnchorLink>
+    <AnchorLink onClick={onLearnMoreClick}>Learn more</AnchorLink>
   </div>
 )
 
 const AnchorLink = styled.a`
   color: #5b0b0b;
   font-weight: bold;
+  cursor:pointer;
 `
 
 const RoundImageWithBorder = styled(Image)`

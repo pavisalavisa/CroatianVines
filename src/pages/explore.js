@@ -23,6 +23,9 @@ const WineCardsGrid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   grid-gap:80px;
   justify-items:center;
+  ${props => props.hideOverflowRows ?
+    `overflow-y:hidden;
+    max-height:170px;` : null}
 `
 
 const Explore = ({ data }) => {
@@ -56,7 +59,7 @@ const Explore = ({ data }) => {
       <FeaturedVinesContainer>
         <h2>Featured vines:</h2>
         <p>Lose yourself in the finest of Croatian wines. Four distinct climates present in Croatia make the pallet of wines vivid and picturesque. Check out what our editors loved the most in the past month:</p>
-        <WineCardsGrid>
+        <WineCardsGrid hideOverflowRows>
           {!!featuredWines ? featuredWines.map(x => <WineCard name={x.Name} description={x.Description} image={x.Image[0].thumbnails.large.url} />) : null}
         </WineCardsGrid>
       </FeaturedVinesContainer>

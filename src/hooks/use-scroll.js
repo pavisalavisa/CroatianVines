@@ -28,14 +28,13 @@ function scrollToPercent(el, container, percentOfElement, offsetPX, percentOfCon
 export default function useScroll(
     percentOfElement = 50,
     offsetPX = 0,
-    container = window,
     percentOfContainer = 50,
 ) {
     const elementRef = useRef(null)
 
     const scroll = useCallback(() => {
         if (elementRef.current) {
-            scrollToPercent(elementRef, container, percentOfElement, offsetPX, percentOfContainer)
+            scrollToPercent(elementRef, window, percentOfElement, offsetPX, percentOfContainer)
         }
     }, [elementRef.current])
 

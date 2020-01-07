@@ -11,8 +11,10 @@ import { searchWines } from "../utilities/fuzzySearch"
 import useDebounce from "../hooks/use-debounce"
 import useScroll from "../hooks/use-scroll"
 
+//TODO: Cleanup code
+//TODO: Add navigation from vines to single vine page
 const FeaturedVinesContainer = styled.div`
-  margin:50px 10% 50px 10%;  
+  margin:50px 5% 0px 5%;  
 `
 const FilteredVinesContainer = styled.div`
   margin:50px 10% 50px 10%;  
@@ -24,8 +26,18 @@ const WineCardsGrid = styled.div`
   grid-gap:80px;
   justify-items:center;
   ${props => props.hideOverflowRows ?
-    `overflow-y:hidden;
-    max-height:170px;` : null}
+    `
+    @media only screen and (max-width: 1700px) {
+      > div:last-child {
+        display:none;
+      }
+    }
+    @media only screen and (max-width: 1100px) {
+      > div:nth-last-child(2) {
+        display:none;
+      }
+    }
+    ` : null}
 `
 
 const Explore = ({ data }) => {

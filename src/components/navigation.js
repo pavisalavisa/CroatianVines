@@ -161,7 +161,7 @@ const AccountSection = () => (
 
 const Navigation = ({ logo, menuItems }) => (
   <StyledHeader>
-    <FlexRow>
+    <FlexRow wrap="nowrap">
       <ImageLink to="/" imagePath={logo} />
       <MenuItems menuItems={menuItems} />
     </FlexRow>

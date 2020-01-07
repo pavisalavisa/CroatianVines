@@ -1,9 +1,5 @@
 import { useRef, useCallback } from 'react'
 
-if (!process.env.BROWSER) {
-    global.window = {}; // Temporarily define window for server-side
-}
-
 function scrollToPercent(el, container, percentOfElement, offsetPX, percentOfContainer) {
     const rect = el.current.getBoundingClientRect()
     const refSize = rect.height
@@ -32,14 +28,13 @@ function scrollToPercent(el, container, percentOfElement, offsetPX, percentOfCon
 export default function useScroll(
     percentOfElement = 50,
     offsetPX = 0,
-    container = window,
     percentOfContainer = 50,
 ) {
     const elementRef = useRef(null)
 
     const scroll = useCallback(() => {
         if (elementRef.current) {
-            scrollToPercent(elementRef, container, percentOfElement, offsetPX, percentOfContainer)
+            scrollToPercent(elementRef, window, percentOfElement, offsetPX, percentOfContainer)
         }
     }, [elementRef.current])
 

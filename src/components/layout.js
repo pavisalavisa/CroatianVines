@@ -1,9 +1,21 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import styled from "styled-components"
 
 import Navigation from "./navigation"
 import Footer from "./footer"
+
+const StyledMain = styled.main`
+  > * {
+    width:90%;
+    margin:7.5% 5% 0 5%;
+  }
+
+  & > :last-child{
+    margin-bottom:7.5%;
+  }
+`
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -37,7 +49,7 @@ const Layout = ({ children }) => {
         logo={data.file.childImageSharp.fixed}
         menuItems={data.site.siteMetadata.menuItems}
       />
-      <main>{children}</main>
+      <StyledMain>{children}</StyledMain>
       <Footer
         logo={data.file.childImageSharp.fixed}
         siteDescription={data.site.siteMetadata.description}

@@ -13,7 +13,7 @@ const HeroImageWrapper = styled.div`
   display: flex;
   position: relative;
   align-items: center;
-  background: linear-gradient(360deg, #ffffff 0%, rgba(255, 255, 255, 0) 7.66%);
+  background: rgba(91,11,11,0.35) linear-gradient(360deg, #ffffff 0%, rgba(255, 255, 255, 0) 7.66%);
 
   &&&{
     margin: 0;

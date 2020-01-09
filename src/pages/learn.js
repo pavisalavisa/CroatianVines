@@ -79,7 +79,7 @@ Book a winery tour with us!</CenteredParagraph>
 const WinemakingProcessSteps = styled(FlexRow)`
   > * {
     width:250px;
-    margin: 2rem 5%;
+    margin: 5% 2.5%;
     flex-grow: 1;
   }
   flex-wrap: wrap;

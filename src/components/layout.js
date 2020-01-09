@@ -9,11 +9,7 @@ import Footer from "./footer"
 const StyledMain = styled.main`
   > * {
     width:90%;
-    margin:7.5% 5% 0 5%;
-  }
-
-  & > :last-child{
-    margin-bottom:7.5%;
+    margin:5% 5% 0 5%;
   }
 `
 

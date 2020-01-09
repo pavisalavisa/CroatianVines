@@ -63,7 +63,7 @@ const Learn = ({ data }) => {
         content={contents.find(content => content.frontmatter.title.toLowerCase().includes("third"))}
         imageTextRef={scrollSteps[2].elementRef}
       />
-      <LabeledText text="Find out more" margin="0 5vw 0 5vw" />
+      <Divider margin="5%"/>
       <CenteredParagraph>Our winemakers are eager to see you. Allow them to share their secrets with you.
 Book a winery tour with us!</CenteredParagraph>
       <WinerySuggestions>
@@ -77,14 +77,17 @@ Book a winery tour with us!</CenteredParagraph>
 }
 
 const WinemakingProcessSteps = styled(FlexRow)`
+  margin-top:0;
+  margin-left:0;
   > * {
     width:250px;
-    margin: 5% 2.5%;
+    margin-left:5%;
+    margin-top:5%;
     flex-grow: 1;
+    min-width:300px;
   }
+  align-items:flex-start;
   flex-wrap: wrap;
-
-  padding-bottom: 2rem;
 `
 
 const MiniStepInfo = ({ icon, title, content, onLearnMoreClick }) => (
@@ -108,9 +111,14 @@ const RoundImageWithBorder = styled(Image)`
 `
 
 const WinerySuggestions = styled(FlexRow)`
-  justify-content:space-around;
+  margin-top:0;
+  justify-content:space-evenly;
   flex-wrap:wrap;
-  margin: 2rem 1rem;
+  align-content:space-between;
+
+  > *{
+    margin-top:5%;
+  }
 `
 
 export const query = graphql`

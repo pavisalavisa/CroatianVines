@@ -37,7 +37,7 @@ const WineName = styled.h3`
 
 const WineDescription = styled.p`
     margin: 0 0 0 50px;
-    font-size:small;
+    font-size: medium;
 `
 
 const WineThumbnail = styled(Img)`

@@ -11,6 +11,7 @@ import WinerySuggestions from "../components/winery/winerySuggestions"
 import { CenteredParagraph } from "../components/common/paragraphs"
 import Divider from "../components/common/divider"
 import useScroll from "../hooks/use-scroll"
+import {AnchorLink} from "../components/common/link"
 
 const Learn = ({ data }) => {
   const images = data.images.nodes
@@ -93,12 +94,6 @@ const MiniStepInfo = ({ icon, title, content, onLearnMoreClick }) => (
     <AnchorLink onClick={onLearnMoreClick}>Learn more</AnchorLink>
   </div>
 )
-
-const AnchorLink = styled.a`
-  color: #5b0b0b;
-  font-weight: bold;
-  cursor:pointer;
-`
 
 const RoundImageWithBorder = styled(Image)`
   border-radius: 50%;

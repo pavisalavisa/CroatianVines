@@ -5,59 +5,37 @@ import LabeledText from "../components/common/labeledText"
 import SearchBox from "../components/common/searchBox"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import WineCard from "../components/wine/wineCard"
 import Divider from "../components/common/divider"
-import { searchWines } from "../utilities/fuzzySearch"
+import { searchWineries } from "../utilities/fuzzySearch"
 import useDebounce from "../hooks/use-debounce"
 import useScroll from "../hooks/use-scroll"
+import FeaturedWinery from "../components/winery/featuredWinery"
+import WineryCard from "../components/winery/wineryCard"
 
-//TODO: Cleanup code
-//TODO: Add navigation from vines to single vine page
-const FeaturedVinesContainer = styled.div`
-  margin:50px 5% 0px 5%;  
-`
-const FilteredVinesContainer = styled.div`
-  margin:50px 10% 50px 10%;  
-`
-
-const WineCardsGrid = styled.div`
-  display:grid;
-  grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
-  grid-gap:80px;
-  justify-items:center;
-  ${props => props.hideOverflowRows ?
-    `
-    @media only screen and (max-width: 1700px) {
-      > div:last-child {
-        display:none;
-      }
-    }
-    @media only screen and (max-width: 1100px) {
-      > div:nth-last-child(2) {
-        display:none;
-      }
-    }
-    ` : null}
+const WinerySearchResultContainer = styled.div`
+  > *{
+    margin-top:5%;
+  }
 `
 
 const Experience = ({ data }) => {
   const heroImage = data.heroImage.childImageSharp
-  const featuredWines = data.featuredWines.nodes.map(x => x.data)
-  const allWines = data.allWines.nodes.map(x => x.data)
+  const allWineries = data.allWineries.nodes.map(x => { return { ...x.data, id: x.id } })
+  const featuredWinery = { ...data.featuredWinery.data, id: data.featuredWinery.id }
 
   const [currentSearchValue, setCurrentSearchValue] = useState('')
-  const [filteredWines, setFilteredWines] = useState(null)
+  const [filteredWineries, setFilteredWineries] = useState(null)
   const debouncedSearchTerm = useDebounce(currentSearchValue, 500)
-  const { elementRef, scroll } = useScroll()
+  const { elementRef, scroll } = useScroll(20)
 
   useEffect(
     () => {
       if (debouncedSearchTerm) {
-        const wines = searchWines(allWines, debouncedSearchTerm)
-        setFilteredWines(wines)
+        const wines = searchWineries(allWineries, debouncedSearchTerm)
+        setFilteredWineries(wines)
       }
       else {
-        setFilteredWines(allWines)
+        setFilteredWineries(allWineries)
       }
     }, [debouncedSearchTerm]
   )
@@ -66,71 +44,42 @@ const Experience = ({ data }) => {
     <Layout>
       <SEO title="Explore" />
       <HeroImage fluid={heroImage.fixed} height="400px">
-        <LabeledText text={"Explore our wine selection"} width="100%" />
+        <LabeledText text={"Ready for an adventure?"} width="100%" />
       </HeroImage>
-      <FeaturedVinesContainer>
-        <h2>Featured vines:</h2>
-        <p>Lose yourself in the finest of Croatian wines. Four distinct climates present in Croatia make the pallet of wines vivid and picturesque. Check out what our editors loved the most in the past month:</p>
-        <WineCardsGrid hideOverflowRows>
-          {!!featuredWines ? featuredWines.map(x => <WineCard name={x.Name} description={x.Description} image={x.Image[0].thumbnails.large.url} />) : null}
-        </WineCardsGrid>
-      </FeaturedVinesContainer>
-      <Divider />
-      <SearchBox hint="Search for vines (e.g. Istria)" onSearch={setCurrentSearchValue} onFocus={scroll} />
-      <LabeledText textRef={elementRef} text="Search results" margin="50px 5%" />
-      <FilteredVinesContainer>
-        {!!filteredWines ?
-          <WineCardsGrid>
-            {filteredWines.map(x => <WineCard
-              name={x.Name}
-              description={x.Description}
-              image={x.Image[0].thumbnails.large.url} />)}
-          </WineCardsGrid> : null}
-      </FilteredVinesContainer>
+      <FeaturedWinery name={featuredWinery.Name} description={featuredWinery.Description} image={featuredWinery.Image.localFiles[0].childImageSharp.fluid} />
+      <SearchBox hint="Search for wineries (e.g. Ilocki podrumi)" onSearch={setCurrentSearchValue} onFocus={scroll} />
+      {!!filteredWineries ?
+        <WinerySearchResultContainer ref={elementRef}>
+          {filteredWineries.map(x => <WineryCard
+            key={x.id}
+            name={x.Name}
+            description={x.Description}
+            image={x.Image.localFiles[0].childImageSharp.fixed} />)}
+        </WinerySearchResultContainer>
+        : null}
     </Layout>
   )
 }
 
 export const query = graphql`
 {
-  heroImage: file(relativePath: {in: "explore-heroImage.jpg"}) {
+  heroImage: file(relativePath: {in: "experience-heroImage.jpg"}) {
     childImageSharp {
-      fixed(quality: 100, height: 1333, width: 2000) {
+      fixed(quality: 100, width:1920, height:620) {
         ...GatsbyImageSharpFixed
       }
     }
   }
-  images: allImageSharp(filter: {fixed: {src: {regex: "/explore-[a-zA-Z0-9]*Image.(png|jpg|gif)/"}}}) {
+  allWineries: allAirtable(filter: {table: {eq: "Wineries"}}) {
     nodes {
-      fluid {
-        ...GatsbyImageSharpFluid
-      }
-    }
-  }
-  icons: allImageSharp(filter: {fixed: {src: {regex: "/explore-[a-zA-Z0-9]*Icon.(png|jpg|gif)/"}}}) {
-    nodes {
-      fixed(width: 110, height: 110) {
-        ...GatsbyImageSharpFixed
-        originalName
-      }
-    }
-  }
-  winery: file(relativePath: {regex: "/winery/"}) {
-    childImageSharp {
-      fixed(width: 350, height: 220) {
-        ...GatsbyImageSharpFixed
-      }
-    }
-  }
-  allWines: allAirtable(filter: {table: {eq: "Wines"}}) {
-    nodes {
+      id: recordId
       data {
         Name
-        Description
+        Description: MediumDescription
         Image {
           localFiles {
             childImageSharp {
-              fixed(height: 275, quality: 100){
+              fixed(height: 250, width: 250, quality: 100, fit:COVER) {
                 ...GatsbyImageSharpFixed
               }
             }
@@ -139,17 +88,16 @@ export const query = graphql`
       }
     }
   }
-  featuredWines: allAirtable(filter: {data: {IsFeatured: {eq: true}}, table: {eq: "Wines"}}) {
-    nodes {
-      data {
-        Name
-        Description
-        Image {
-          localFiles {
-            childImageSharp {
-              fixed(height: 275, quality: 100){
-                ...GatsbyImageSharpFixed
-              }
+  featuredWinery: airtable(table: {eq: "Wineries"}, data: {IsFeatured: {eq: true}}) {
+    id: recordId
+    data {
+      Description: MediumDescription
+      Name
+      Image {
+        localFiles {
+          childImageSharp {
+            fluid(quality: 100, fit:COVER) {
+              ...GatsbyImageSharpFluid
             }
           }
         }

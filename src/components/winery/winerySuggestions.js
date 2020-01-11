@@ -17,7 +17,7 @@ const WinerySuggestionsContainer = styled(FlexRow)`
 `
 
 export default () => {
-
+    //TODO: Feed data from the parent
     const data = useStaticQuery(graphql`
     {
         suggestedWineries: allAirtable(filter: {table: {eq: "Wineries"}}, limit: 3) {
@@ -25,7 +25,7 @@ export default () => {
             id: recordId
             data {
               Name
-              Description
+              Description: ShortDescription
               Image {
                 localFiles {
                   childImageSharp {

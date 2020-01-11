@@ -33,7 +33,7 @@ const WineCardsGrid = styled.div`
     ` : null}
 `
 
-const Explore = ({ data }) => {
+const Collection = ({ data }) => {
   const heroImage = data.heroImage.childImageSharp
   const allWines = data.allWines.nodes;
 
@@ -58,7 +58,7 @@ const Explore = ({ data }) => {
     <Layout>
       <SEO title="Explore" />
       <HeroImage fluid={heroImage.fixed} height="400px">
-        <LabeledText text={"Explore our wine selection"} width="100%" />
+        <LabeledText text={"Explore our wine collection"} width="100%" />
       </HeroImage>
       <SearchBox hint="Search for vines (e.g. Istria)" onSearch={setCurrentSearchValue} onFocus={scroll} />
       {!!filteredWines ?
@@ -130,4 +130,4 @@ export const query = graphql`
 }
 `
 
-export default Explore
+export default Collection

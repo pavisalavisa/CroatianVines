@@ -12,10 +12,10 @@ const StyledInput = styled.input`
     padding:0.5rem 1.25rem;
     border-radius:6px;
     position:relative;
-    right:-25px;
     border: 1px solid rgba(0,0,0,0.3);
 
     width:${props => props.width ? props.width : "auto"};
+    min-width:${props => props.minWidth ? props.minWidth : null};
     font-size:${props => props.fontSize ? props.fontSize : "medium"};
 
     &:focus{
@@ -43,6 +43,7 @@ const SearchBox = ({ hint, onSearch, onFocus }) => {
             onChange={handleInputChange}
             fontSize="xx-large"
             width="45%"
+            minWidth="440px"
             onFocus={onFocus} />
     </SearchBoxContainer>
 }

@@ -35,7 +35,7 @@ const WineCardsGrid = styled.div`
 
 const Collection = ({ data }) => {
   const heroImage = data.heroImage.childImageSharp
-  const allWines = data.allWines.nodes;
+  const allWines = data.allWines.nodes.map(x => { return { ...x.data, id: x.id } });
 
   const [currentSearchValue, setCurrentSearchValue] = useState('')
   const [filteredWines, setFilteredWines] = useState(null)
@@ -62,13 +62,13 @@ const Collection = ({ data }) => {
       </HeroImage>
       <SearchBox hint="Search for vines (e.g. Istria)" onSearch={setCurrentSearchValue} onFocus={scroll} />
       {!!filteredWines ?
-          <WineCardsGrid ref={elementRef} >
-            {filteredWines.map(x => <WineCard
-              key={x.id}
-              name={x.data.Name}
-              description={x.data.Description}
-              image={x.data.Image.localFiles[0].childImageSharp.fixed} />)}
-          </WineCardsGrid> : null}
+        <WineCardsGrid ref={elementRef} >
+          {filteredWines.map(x => <WineCard
+            key={x.id}
+            name={x.Name}
+            description={x.Description}
+            image={x.Image.localFiles[0].childImageSharp.fixed} />)}
+        </WineCardsGrid> : null}
     </Layout>
   )
 }

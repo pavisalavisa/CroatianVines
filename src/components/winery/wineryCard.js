@@ -4,13 +4,14 @@ import Img from "gatsby-image"
 
 import { hoverAnimationStyle } from "../common/container"
 import Divider from "../common/divider"
+import { EllipsisParagraph } from "../common/paragraphs"
 
 export default ({ image, name, description }) => (
     <WineryCardContainer>
         <div>
             <WineryName>{name}</WineryName>
-            <Divider margin="0.75rem 50px" />
-            <WineryDescription>{description}</WineryDescription>
+            <Divider margin="0.75rem 25px" />
+            <WineryDescription lineNumber={7}>{description}</WineryDescription>
         </div>
         <WineryThumbnail fixed={image} />
     </WineryCardContainer>
@@ -30,17 +31,15 @@ const WineryCardContainer = styled.div`
 `
 
 const WineryName = styled.h3`
-    margin: 20px 0 0 50px;
+    margin: 25px 0 0 25px;
 `
 
-const WineryDescription = styled.p`
-    margin: 0 0 20px 50px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+const WineryDescription = styled(EllipsisParagraph)`
+    margin: 0 0 25px 25px;    
     font-size:medium;
 `
 
 const WineryThumbnail = styled(Img)`
-    margin: 20px 50px;
+    margin: 25px;
     min-width:250px;
 `

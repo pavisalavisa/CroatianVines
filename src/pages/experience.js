@@ -26,7 +26,7 @@ const Experience = ({ data }) => {
   const [currentSearchValue, setCurrentSearchValue] = useState('')
   const [filteredWineries, setFilteredWineries] = useState(null)
   const debouncedSearchTerm = useDebounce(currentSearchValue, 500)
-  const { elementRef, scroll } = useScroll(20)
+  const { elementRef, scroll } = useScroll(10)
 
   useEffect(
     () => {

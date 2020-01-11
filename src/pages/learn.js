@@ -7,7 +7,7 @@ import Image from "gatsby-image"
 import FlexRow from "../components/common/container"
 import styled from "styled-components"
 import ImageText from "../components/imageText"
-import MiniWineryCard from "../components/miniWineryCard"
+import WinerySuggestions from "../components/winerySuggestions"
 import { CenteredParagraph } from "../components/common/paragraphs"
 import Divider from "../components/common/divider"
 import useScroll from "../hooks/use-scroll"
@@ -63,15 +63,10 @@ const Learn = ({ data }) => {
         content={contents.find(content => content.frontmatter.title.toLowerCase().includes("third"))}
         imageTextRef={scrollSteps[2].elementRef}
       />
-      <Divider margin="5%"/>
+      <Divider margin="5%" />
       <CenteredParagraph>Our winemakers are eager to see you. Allow them to share their secrets with you.
 Book a winery tour with us!</CenteredParagraph>
-      <WinerySuggestions>
-        <MiniWineryCard image={data.winery.childImageSharp.fixed} name="Matusko" description="loremipsume" />
-        <MiniWineryCard image={data.winery.childImageSharp.fixed} name="Matusko" description="loremipsume" />
-        <MiniWineryCard image={data.winery.childImageSharp.fixed} name="Matusko" description="loremipsume" />
-      </WinerySuggestions>
-      {/* TODO: Get this from airtable, this is prone to change unlike other static content */}
+      <WinerySuggestions />
     </Layout>
   )
 }
@@ -108,17 +103,6 @@ const AnchorLink = styled.a`
 const RoundImageWithBorder = styled(Image)`
   border-radius: 50%;
   border: 1px solid rgba(0, 0, 0, 0.3);
-`
-
-const WinerySuggestions = styled(FlexRow)`
-  margin-top:0;
-  justify-content:space-evenly;
-  flex-wrap:wrap;
-  align-content:space-between;
-
-  > *{
-    margin-top:5%;
-  }
 `
 
 export const query = graphql`
@@ -177,15 +161,7 @@ export const query = graphql`
         }
       }
     }
-
-    winery: file(relativePath: {regex: "/winery/"}) {
-      childImageSharp {
-        fixed (width:350 height:220) {
-          ...GatsbyImageSharpFixed
-        }
-      }
-    }
-
+  
     site {
       siteMetadata {
         title

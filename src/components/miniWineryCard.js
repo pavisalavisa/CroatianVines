@@ -26,11 +26,15 @@ const MiniWineryCardContainer = styled.div`
         transform: scale(1.1);
         cursor: pointer;
     }
+
+    & > h2,p{
+        margin:1rem;
+    }
     
     box-sizing:content-box;
 
-    width:350px;
-    height:380px;
+    width:440px;
+    height:480px;
     border: 1px solid rgba(0,0,0,0.3);
 `
 

@@ -6,7 +6,7 @@ import Image from "gatsby-image"
 import { Link } from "gatsby"
 
 const StyledFooter = styled.footer`
-  margin:5%;
+  margin:5% 5% 2.5% 5%;
   width:90%;
 `
 const SocialMediaContainer = styled.div`

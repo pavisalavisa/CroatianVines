@@ -80,12 +80,12 @@ module.exports = {
           {
             baseId: `app1YxhjCyOseAVb1`,
             tableName: `Wines`,
-            mapping: { image: `fileNode` }, // optional, e.g. "text/markdown", "fileNode"
+            mapping: { Image: `fileNode` }, // optional, e.g. "text/markdown", "fileNode"
           },
           {
             baseId: `app1YxhjCyOseAVb1`,
             tableName: `Wineries`,
-            mapping: { image: `fileNode` },
+            mapping: { Image: `fileNode` },
           }
         ]
       }

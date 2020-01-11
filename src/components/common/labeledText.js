@@ -12,7 +12,6 @@ const LabeledText = ({ margin, width, text, textRef }) =>
 
 const TextContainer = styled.div`
     display:flex;
-    background: rgba(91, 11, 11, 0.75);
     align-items:center;
     justify-content:center;
     width:${props => props.width || "auto"};

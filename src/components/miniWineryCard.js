@@ -24,6 +24,7 @@ const MiniWineryCardContainer = styled.div`
     &:hover, &:focus, &:active {
         -webkit-transform: scale(1.1);
         transform: scale(1.1);
+        cursor: pointer;
     }
     
     box-sizing:content-box;

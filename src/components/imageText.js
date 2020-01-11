@@ -37,7 +37,7 @@ const SubscriptContainer = styled.div`
 
 const ImageTextWrapper = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: ${props => (props.wrapReverse ? "wrap-reverse" : "wrap")};
 
@@ -46,23 +46,22 @@ const ImageTextWrapper = styled.div`
   }
 
   & > :first-child{
-    margin: 50px 40px 50px 0;
+    margin-right:2.5%;
   }
   & > :last-child{
-    margin:50px 50px 0 40px;
+    margin-left:2.5%;
   }
 `
 
 const StyledImage = styled(Image)`
   height: ${props => props.height || "400px"};
-  width: ${props => props.width || "600px"};
-  min-width: 300px;
-  max-width:600px;
+  width:45%;
+  min-width:400px;
 `
 
 const ContentContainer = styled.div`
-  min-width: 300px;
-  max-width: 600px;
+  min-width: 400px;
+  width: 45%;
   height:400px;
 `
 

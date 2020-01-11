@@ -5,7 +5,7 @@ import LabeledText from "../components/common/labeledText"
 import SearchBox from "../components/common/searchBox"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import WineCard from "../components/wineCard"
+import WineCard from "../components/wine/wineCard"
 import { searchWines } from "../utilities/fuzzySearch"
 import useDebounce from "../hooks/use-debounce"
 import useScroll from "../hooks/use-scroll"
@@ -60,25 +60,10 @@ const Collection = ({ data }) => {
 
 export const query = graphql`
 {
-  heroImage: file(relativePath: {in: "explore-heroImage.jpg"}) {
+  heroImage: file(relativePath: {in: "collection-heroImage.jpg"}) {
     childImageSharp {
       fixed(quality: 100, height: 1333, width: 2000) {
         ...GatsbyImageSharpFixed
-      }
-    }
-  }
-  images: allImageSharp(filter: {fixed: {src: {regex: "/explore-[a-zA-Z0-9]*Image.(png|jpg|gif)/"}}}) {
-    nodes {
-      fluid {
-        ...GatsbyImageSharpFluid
-      }
-    }
-  }
-  icons: allImageSharp(filter: {fixed: {src: {regex: "/explore-[a-zA-Z0-9]*Icon.(png|jpg|gif)/"}}}) {
-    nodes {
-      fixed(width: 110, height: 110) {
-        ...GatsbyImageSharpFixed
-        originalName
       }
     }
   }

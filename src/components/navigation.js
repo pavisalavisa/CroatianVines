@@ -5,7 +5,7 @@ import { useResponsiveMenu, useOnOutsideEvent } from "../hooks/use-responsive-me
 import PropTypes from "prop-types"
 import React from "react"
 import styled from "styled-components"
-import ImageLink from "./common/imageLink"
+import { ImageLink } from "./common/link"
 import StyledButton from "./common/button"
 import { FlexRow, underlinedContainerStyle } from "./common/container"
 import more from "../images/more.svg"

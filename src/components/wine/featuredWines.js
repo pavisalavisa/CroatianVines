@@ -12,7 +12,7 @@
 //                 Image {
 //                   localFiles {
 //                     childImageSharp {
-//                       fixed(height: 125, quality: 100){
+//                       fixed(height: 125, >quality: 100){
 //                         ...GatsbyImageSharpFixed
 //                       }
 //                     }

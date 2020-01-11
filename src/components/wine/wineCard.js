@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components"
 import Img from "gatsby-image"
 
-import { hoverAnimationStyle } from "./common/container"
-import Divider from "./common/divider"
+import { hoverAnimationStyle } from "../common/container"
+import Divider from "../common/divider"
 
 const WineCard = ({ image, name, description }) => (
     <WineCardContainer>
@@ -37,7 +37,7 @@ const WineName = styled.h3`
 
 const WineDescription = styled.p`
     margin: 0 0 0 50px;
-    font-size:small;
+    font-size: medium;
 `
 
 const WineThumbnail = styled(Img)`

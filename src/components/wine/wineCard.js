@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components"
 import Img from "gatsby-image"
 
-import { hoverAnimationStyle } from "./common/container"
-import Divider from "./common/divider"
+import { hoverAnimationStyle } from "../common/container"
+import Divider from "../common/divider"
 
 const WineCard = ({ image, name, description }) => (
     <WineCardContainer>

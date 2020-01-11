@@ -2,8 +2,8 @@ import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
 import React from "react"
 
-import MiniWineryCard from "../components/miniWineryCard"
-import FlexRow from "../components/common/container"
+import MiniWineryCard from "./miniWineryCard"
+import FlexRow from "../common/container"
 
 const WinerySuggestionsContainer = styled(FlexRow)`
     margin-top:0;

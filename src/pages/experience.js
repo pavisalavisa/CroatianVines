@@ -22,7 +22,7 @@ const FilteredVinesContainer = styled.div`
 
 const WineCardsGrid = styled.div`
   display:grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
   grid-gap:80px;
   justify-items:center;
   ${props => props.hideOverflowRows ?
@@ -40,7 +40,7 @@ const WineCardsGrid = styled.div`
     ` : null}
 `
 
-const Explore = ({ data }) => {
+const Experience = ({ data }) => {
   const heroImage = data.heroImage.childImageSharp
   const featuredWines = data.featuredWines.nodes.map(x => x.data)
   const allWines = data.allWines.nodes.map(x => x.data)
@@ -164,4 +164,4 @@ export const query = graphql`
 }
 `
 
-export default Explore
+export default Experience

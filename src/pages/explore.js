@@ -6,19 +6,12 @@ import SearchBox from "../components/common/searchBox"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import WineCard from "../components/wineCard"
-import Divider from "../components/common/divider"
 import { searchWines } from "../utilities/fuzzySearch"
 import useDebounce from "../hooks/use-debounce"
 import useScroll from "../hooks/use-scroll"
 
 //TODO: Cleanup code
 //TODO: Add navigation from vines to single vine page
-const FeaturedVinesContainer = styled.div`
-  margin:50px 5% 0px 5%;  
-`
-const FilteredVinesContainer = styled.div`
-  margin:50px 10% 50px 10%;  
-`
 
 const WineCardsGrid = styled.div`
   display:grid;
@@ -42,8 +35,7 @@ const WineCardsGrid = styled.div`
 
 const Explore = ({ data }) => {
   const heroImage = data.heroImage.childImageSharp
-  const featuredWines = data.featuredWines.nodes.map(x => x.data)
-  const allWines = data.allWines.nodes.map(x => x.data)
+  const allWines = data.allWines.nodes;
 
   const [currentSearchValue, setCurrentSearchValue] = useState('')
   const [filteredWines, setFilteredWines] = useState(null)
@@ -68,25 +60,15 @@ const Explore = ({ data }) => {
       <HeroImage fluid={heroImage.fixed} height="400px">
         <LabeledText text={"Explore our wine selection"} width="100%" />
       </HeroImage>
-      <FeaturedVinesContainer>
-        <h2>Featured vines:</h2>
-        <p>Lose yourself in the finest of Croatian wines. Four distinct climates present in Croatia make the pallet of wines vivid and picturesque. Check out what our editors loved the most in the past month:</p>
-        <WineCardsGrid hideOverflowRows>
-          {!!featuredWines ? featuredWines.map(x => <WineCard name={x.Name} description={x.Description} image={x.Image[0].thumbnails.large.url} />) : null}
-        </WineCardsGrid>
-      </FeaturedVinesContainer>
-      <Divider />
       <SearchBox hint="Search for vines (e.g. Istria)" onSearch={setCurrentSearchValue} onFocus={scroll} />
-      <LabeledText textRef={elementRef} text="Search results" margin="50px 5%" />
-      <FilteredVinesContainer>
-        {!!filteredWines ?
-          <WineCardsGrid>
+      {!!filteredWines ?
+          <WineCardsGrid ref={elementRef} >
             {filteredWines.map(x => <WineCard
-              name={x.Name}
-              description={x.Description}
-              image={x.Image[0].thumbnails.large.url} />)}
+              key={x.id}
+              name={x.data.Name}
+              description={x.data.Description}
+              image={x.data.Image.localFiles[0].childImageSharp.fixed} />)}
           </WineCardsGrid> : null}
-      </FilteredVinesContainer>
     </Layout>
   )
 }
@@ -124,30 +106,14 @@ export const query = graphql`
   }
   allWines: allAirtable(filter: {table: {eq: "Wines"}}) {
     nodes {
+      id: recordId
       data {
         Name
         Description
         Image {
           localFiles {
             childImageSharp {
-              fixed(height: 275, quality: 100){
-                ...GatsbyImageSharpFixed
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  featuredWines: allAirtable(filter: {data: {IsFeatured: {eq: true}}, table: {eq: "Wines"}}) {
-    nodes {
-      data {
-        Name
-        Description
-        Image {
-          localFiles {
-            childImageSharp {
-              fixed(height: 275, quality: 100){
+              fixed(height: 125, width: 125, quality: 100, fit: CONTAIN, background: "white"){
                 ...GatsbyImageSharpFixed
               }
             }

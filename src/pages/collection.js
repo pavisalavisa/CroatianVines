@@ -10,27 +10,12 @@ import { searchWines } from "../utilities/fuzzySearch"
 import useDebounce from "../hooks/use-debounce"
 import useScroll from "../hooks/use-scroll"
 
-//TODO: Cleanup code
-//TODO: Add navigation from vines to single vine page
 
 const WineCardsGrid = styled.div`
   display:grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   grid-gap:80px;
   justify-items:center;
-  ${props => props.hideOverflowRows ?
-    `
-    @media only screen and (max-width: 1700px) {
-      > div:last-child {
-        display:none;
-      }
-    }
-    @media only screen and (max-width: 1100px) {
-      > div:nth-last-child(2) {
-        display:none;
-      }
-    }
-    ` : null}
 `
 
 const Collection = ({ data }) => {
@@ -40,7 +25,7 @@ const Collection = ({ data }) => {
   const [currentSearchValue, setCurrentSearchValue] = useState('')
   const [filteredWines, setFilteredWines] = useState(null)
   const debouncedSearchTerm = useDebounce(currentSearchValue, 500)
-  const { elementRef, scroll } = useScroll()
+  const { elementRef, scroll } = useScroll(20)
 
   useEffect(
     () => {

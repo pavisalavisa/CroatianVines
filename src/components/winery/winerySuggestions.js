@@ -2,8 +2,8 @@ import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
 import React from "react"
 
-import MiniWineryCard from "../components/miniWineryCard"
-import FlexRow from "../components/common/container"
+import MiniWineryCard from "./miniWineryCard"
+import FlexRow from "../common/container"
 
 const WinerySuggestionsContainer = styled(FlexRow)`
     margin-top:0;
@@ -17,7 +17,7 @@ const WinerySuggestionsContainer = styled(FlexRow)`
 `
 
 export default () => {
-
+    //TODO: Feed data from the parent
     const data = useStaticQuery(graphql`
     {
         suggestedWineries: allAirtable(filter: {table: {eq: "Wineries"}}, limit: 3) {
@@ -25,7 +25,7 @@ export default () => {
             id: recordId
             data {
               Name
-              Description
+              Description: ShortDescription
               Image {
                 localFiles {
                   childImageSharp {

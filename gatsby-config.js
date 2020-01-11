@@ -10,8 +10,8 @@ module.exports = {
         partiallyActive: true,
       },
       {
-        text: "Explore",
-        path: "/explore",
+        text: "Collection",
+        path: "/collection",
         partiallyActive: true,
       },
       {

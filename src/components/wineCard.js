@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components"
+import Img from "gatsby-image"
 
 import { hoverAnimationStyle } from "./common/container"
 import Divider from "./common/divider"
@@ -11,7 +12,7 @@ const WineCard = ({ image, name, description }) => (
             <Divider margin="0.75rem 50px" />
             <WineDescription>{description}</WineDescription>
         </div>
-        <WineThumbnail src={image} />
+        <WineThumbnail fixed={image} />
     </WineCardContainer>
 )
 
@@ -24,6 +25,10 @@ const WineCardContainer = styled.div`
     width:440px;
     height:165px;
     border: 1px solid rgba(0,0,0,0.3);
+
+    &:hover{
+        cursor: pointer;
+    }
 `
 
 const WineName = styled.h3`
@@ -35,10 +40,8 @@ const WineDescription = styled.p`
     font-size:small;
 `
 
-const WineThumbnail = styled.img`
-    margin:20px 20px 0 0;
-    height:125px;
-    width:auto;
+const WineThumbnail = styled(Img)`
+    margin:20px;
 `
 
 export default WineCard;

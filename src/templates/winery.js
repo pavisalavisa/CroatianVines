@@ -20,7 +20,7 @@ query ($wineryId: String!) {
     wine:airtable(table: {eq: "Wineries"}, recordId: {eq: $wineryId}) {
       recordId
       data {
-        Description
+        ShortDescription
         Name
       }
     }

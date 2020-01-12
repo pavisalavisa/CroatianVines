@@ -3,28 +3,30 @@ import styled from "styled-components"
 import Image from "gatsby-image"
 import { SubscriptParagraph } from "../components/common/paragraphs"
 
-//This guy shouldn't know žžđabout frontmatter
-const ImageText = ({ image, content, mirrored, imageTextRef }) => {
+
+const ImageText = ({ image, contents, mirrored, imageTextRef }) => {
   return mirrored ? (
     <ImageTextWrapper wrapReverse ref={imageTextRef}>
       <StyledImage fluid={image} />
-      <Content {...content} />
+      <Content contents={contents} />
     </ImageTextWrapper>
   ) : (
       <ImageTextWrapper ref={imageTextRef}>
-        <Content {...content} />
+        <Content contents={contents} />
         <StyledImage fluid={image} />
       </ImageTextWrapper>
     )
 }
 
-const Content = ({ frontmatter }) => {
+const Content = ({ contents }) => {
+  const { title, content, subscript } = contents
+
   return (
     <ContentContainer>
-      <h1>{frontmatter.title}</h1>
-      <p>{frontmatter.content}</p>
+      {title ? <h1>{title}</h1> : null}
+      <p>{content}</p>
       <SubscriptContainer>
-        <SubscriptParagraph>{frontmatter.subscript}</SubscriptParagraph>
+        <SubscriptParagraph>{subscript}</SubscriptParagraph>
       </SubscriptContainer>
     </ContentContainer>
   )

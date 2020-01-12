@@ -21,24 +21,24 @@ const IndexPage = ({ data }) => {
       </HeroImage>
       <ImageText
         image={images.find(image => image.fluid.src.includes("awards")).fluid}
-        content={contents.find(content =>
+        contents={contents.find(content =>
           content.frontmatter.title.toLowerCase().includes("awards")
-        )}
+        ).frontmatter}
       />
       <ImageText
         mirrored
         image={
           images.find(image => image.fluid.src.includes("tradition")).fluid
         }
-        content={contents.find(content =>
+        contents={contents.find(content =>
           content.frontmatter.title.toLowerCase().includes("tradition")
-        )}
+        ).frontmatter}
       />
       <ImageText
         image={images.find(image => image.fluid.src.includes("future")).fluid}
-        content={contents.find(content =>
+        contents={contents.find(content =>
           content.frontmatter.title.toLowerCase().includes("future")
-        )}
+        ).frontmatter}
       />
     </Layout>
   )

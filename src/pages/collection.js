@@ -51,7 +51,7 @@ const Collection = ({ data }) => {
           {filteredWines.map(x => <WineCard
             key={x.id}
             name={x.Name}
-            description={x.Description}
+            description={x.ShortDescription}
             image={x.Image.localFiles[0].childImageSharp.fixed}
             link={x.id} />)}
         </WineCardsGrid> : null}
@@ -80,7 +80,7 @@ export const query = graphql`
       id: recordId
       data {
         Name
-        Description
+        ShortDescription
         Image {
           localFiles {
             childImageSharp {

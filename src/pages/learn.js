@@ -11,7 +11,7 @@ import WinerySuggestions from "../components/winery/winerySuggestions"
 import { CenteredParagraph } from "../components/common/paragraphs"
 import Divider from "../components/common/divider"
 import useScroll from "../hooks/use-scroll"
-import {AnchorLink} from "../components/common/link"
+import { AnchorLink } from "../components/common/link"
 
 const Learn = ({ data }) => {
   const images = data.images.nodes
@@ -50,18 +50,18 @@ const Learn = ({ data }) => {
       <ImageText
         mirrored
         image={images.find(image => image.fluid.src.includes("step1Image")).fluid}
-        content={contents.find(content => content.frontmatter.title.toLowerCase().includes("first"))}
+        contents={contents.find(content => content.frontmatter.title.toLowerCase().includes("first")).frontmatter}
         imageTextRef={scrollSteps[0].elementRef}
       />
       <ImageText
         image={images.find(image => image.fluid.src.includes("step2Image")).fluid}
-        content={contents.find(content => content.frontmatter.title.toLowerCase().includes("second"))}
+        contents={contents.find(content => content.frontmatter.title.toLowerCase().includes("second")).frontmatter}
         imageTextRef={scrollSteps[1].elementRef}
       />
       <ImageText
         mirrored
         image={images.find(image => image.fluid.src.includes("step3Image")).fluid}
-        content={contents.find(content => content.frontmatter.title.toLowerCase().includes("third"))}
+        contents={contents.find(content => content.frontmatter.title.toLowerCase().includes("third")).frontmatter}
         imageTextRef={scrollSteps[2].elementRef}
       />
       <Divider margin="5%" />

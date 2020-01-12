@@ -40,31 +40,25 @@ const SubscriptContainer = styled.div`
 const ImageTextWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: ${props => (props.wrapReverse ? "wrap-reverse" : "wrap")};
 
   > *{
     flex-grow:1;
   }
-
   & > :first-child{
-    margin-right:2.5%;
-  }
-  & > :last-child{
-    margin-left:2.5%;
+    margin-right:5%;
   }
 `
 
 const StyledImage = styled(Image)`
-  height: ${props => props.height || "400px"};
-  width:45%;
-  min-width:400px;
+  width:40%;
+  min-width:300px;
 `
 
 const ContentContainer = styled.div`
-  min-width: 400px;
-  width: 45%;
-  height:400px;
+  width: 40%;
+  min-width: 300px;
 `
 
 export default ImageText

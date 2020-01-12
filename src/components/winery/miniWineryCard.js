@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components"
 import Image from "gatsby-image"
+import { EllipsisParagraph } from "../common/paragraphs"
 
 const MiniWineryCard = ({ image, name, description }) => (
     <MiniWineryCardContainer>
         <Image fixed={image} />
         <h2>{name}</h2>
-        <p>{description}</p>
+        <EllipsisParagraph lineNumber={3} >{description}</EllipsisParagraph>
     </MiniWineryCardContainer>
 )
 
@@ -33,8 +34,8 @@ const MiniWineryCardContainer = styled.div`
     
     box-sizing:content-box;
 
-    width:440px;
-    height:480px;
+    width:350px;
+    height:400px;
     border: 1px solid rgba(0,0,0,0.3);
 `
 

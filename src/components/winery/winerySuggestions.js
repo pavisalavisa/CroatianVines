@@ -29,7 +29,7 @@ export default () => {
               Image {
                 localFiles {
                   childImageSharp {
-                    fixed(height: 275, width: 440, quality: 100) {
+                    fixed(height: 220, width: 350, quality: 100) {
                       ...GatsbyImageSharpFixed
                     }
                   }

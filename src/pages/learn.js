@@ -64,7 +64,7 @@ const Learn = ({ data }) => {
         contents={contents.find(content => content.frontmatter.title.toLowerCase().includes("third")).frontmatter}
         imageTextRef={scrollSteps[2].elementRef}
       />
-      <Divider margin="5%" />
+      <Divider margin="5% 10%" />
       <CenteredParagraph>Our winemakers are eager to see you. Allow them to share their secrets with you.
 Book a winery tour with us!</CenteredParagraph>
       <WinerySuggestions />
@@ -73,14 +73,10 @@ Book a winery tour with us!</CenteredParagraph>
 }
 
 const WinemakingProcessSteps = styled(FlexRow)`
-  margin-top:0;
-  margin-left:0;
   > * {
     width:250px;
-    margin-left:5%;
-    margin-top:5%;
     flex-grow: 1;
-    min-width:300px;
+    margin:2.5%
   }
   align-items:flex-start;
   flex-wrap: wrap;

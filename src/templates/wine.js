@@ -17,7 +17,7 @@ export default ({ data }) => {
     const firstBlockImage = wine.Contents[1].data.Image
     const secondBlockContent = { content: wine.Contents[2].data.Content, subscript: wine.Contents[1].data.Subscript }
     const secondBlockImage = wine.Contents[2].data.Image
-    
+
     return (
         <Layout>
             <Title>{wine.Name}</Title>
@@ -25,8 +25,8 @@ export default ({ data }) => {
             <Divider />
             <ImageText contents={firstBlockContent} image={firstBlockImage.localFiles[0].childImageSharp.fluid} mirrored />
             <ImageText contents={secondBlockContent} image={secondBlockImage.localFiles[0].childImageSharp.fluid} />
-            <CenteredParagraph>See what others think</CenteredParagraph>
-
+            <Divider />
+            <CenteredParagraph><h2>Not what you're looking for?</h2></CenteredParagraph>
         </Layout>
     )
 }

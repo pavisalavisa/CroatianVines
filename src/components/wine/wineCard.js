@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components"
 import Img from "gatsby-image"
+import { navigate } from '@reach/router';
 
 import { hoverAnimationStyle } from "../common/container"
 import Divider from "../common/divider"
 
-const WineCard = ({ image, name, description }) => (
-    <WineCardContainer>
+const WineCard = ({ image, name, description, link }) => (
+    <WineCardContainer onClick={link ? () => navigate(`/wine/${link}`) : null}>
         <div>
             <WineName>{name}</WineName>
             <Divider margin="0.75rem 50px" />

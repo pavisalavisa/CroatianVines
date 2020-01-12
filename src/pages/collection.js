@@ -52,7 +52,8 @@ const Collection = ({ data }) => {
             key={x.id}
             name={x.Name}
             description={x.Description}
-            image={x.Image.localFiles[0].childImageSharp.fixed} />)}
+            image={x.Image.localFiles[0].childImageSharp.fixed}
+            link={x.id} />)}
         </WineCardsGrid> : null}
     </Layout>
   )

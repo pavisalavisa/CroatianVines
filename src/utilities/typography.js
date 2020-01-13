@@ -3,7 +3,7 @@ import Typography from "typography"
 const typography = new Typography({
   baseFontSize: "18px",
   baseLineHeight: 1.5,
-  scaleRatio: 2,
+  scaleRatio: 3,
   headerFontFamily: [
     "Montserrat",
     "Avenir Next",
@@ -24,7 +24,12 @@ const typography = new Typography({
         '500',
       ],
     },
-  ]
+  ],
+  overrideStyles: ({ adjustFontSizeTo, rhythm }, options, styles) => ({
+    '@media screen and (max-width: 1024px){html{font-size:18px}}': {},
+    '@media screen and (max-width: 640px){html{font-size:16px}}': {},
+    '@media screen and (max-width: 480px){html{font-size:13px}}': {},
+  }),
 })
 
 export default typography

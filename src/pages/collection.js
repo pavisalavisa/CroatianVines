@@ -13,7 +13,7 @@ import useScroll from "../hooks/use-scroll"
 
 const WineCardsGrid = styled.div`
   display:grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap:80px;
   justify-items:center;
 `
@@ -68,6 +68,7 @@ export const query = graphql`
       }
     }
   }
+
   winery: file(relativePath: {regex: "/winery/"}) {
     childImageSharp {
       fixed(width: 350, height: 220) {
@@ -75,6 +76,7 @@ export const query = graphql`
       }
     }
   }
+
   allWines: allAirtable(filter: {table: {eq: "Wines"}}) {
     nodes {
       id: recordId
@@ -93,6 +95,7 @@ export const query = graphql`
       }
     }
   }
+
   site {
     siteMetadata {
       title

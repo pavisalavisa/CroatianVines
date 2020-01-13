@@ -6,9 +6,8 @@ import ImageText from "../components/imageText"
 import LabeledText from "../components/common/labeledText"
 
 const IndexPage = ({ data }) => {
-  const images = data.images.nodes.map(node => node.childImageSharp)
-  const contents = data.contents.nodes
   const heroImage = data.heroImage.childImageSharp
+  const imageContents = data.contents.nodes.map(c => ({ content: c.frontmatter, image: data.images.nodes.map(node => node.childImageSharp)[c.frontmatter.ordinalNumber - 1] }))
 
   return (
     <Layout>
@@ -19,27 +18,12 @@ const IndexPage = ({ data }) => {
       >
         <LabeledText text={"Tell us about yourself"} width="100%" />
       </HeroImage>
-      <ImageText
-        image={images.find(image => image.fluid.src.includes("awards")).fluid}
-        contents={contents.find(content =>
-          content.frontmatter.title.toLowerCase().includes("awards")
-        ).frontmatter}
-      />
-      <ImageText
-        mirrored
-        image={
-          images.find(image => image.fluid.src.includes("tradition")).fluid
-        }
-        contents={contents.find(content =>
-          content.frontmatter.title.toLowerCase().includes("tradition")
-        ).frontmatter}
-      />
-      <ImageText
-        image={images.find(image => image.fluid.src.includes("future")).fluid}
-        contents={contents.find(content =>
-          content.frontmatter.title.toLowerCase().includes("future")
-        ).frontmatter}
-      />
+      {imageContents.map((ic, i) =>
+        (<ImageText
+          mirrored={i % 2}
+          image={ic.image.fluid}
+          contents={ic.content}
+        />))}
     </Layout>
   )
 }
@@ -54,9 +38,7 @@ export const query = graphql`
       }
     }
 
-    images: allFile(
-      filter: { relativePath: { regex: "/home-[a-zA-Z0-9]*.(png|jpg|gif)/" } }
-    ) {
+    images: allFile(filter: {relativePath: {regex: "/home-[0-9]*-[a-zA-Z0-9]*.(png|jpg|gif)/"}, name: {ne: "home-heroImage"}}, sort: {fields: name}) {
       nodes {
         childImageSharp {
           fluid {
@@ -66,15 +48,14 @@ export const query = graphql`
       }
     }
 
-    contents: allMarkdownRemark(
-      filter: { fileAbsolutePath: { regex: "/(index)/" } }
-    ) {
+    contents: allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/(index)/"}}, sort: {fields: frontmatter___ordinalNumber}) {
       nodes {
         html
         frontmatter {
           subscript
           title
           content
+          ordinalNumber
         }
       }
     }

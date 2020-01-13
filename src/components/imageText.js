@@ -7,13 +7,13 @@ import { SubscriptParagraph } from "../components/common/paragraphs"
 const ImageText = ({ image, contents, mirrored, imageTextRef }) => {
   return mirrored ? (
     <ImageTextWrapper wrapReverse ref={imageTextRef}>
-      <StyledImage fluid={image} />
+      <Image fluid={image} />
       <Content contents={contents} />
     </ImageTextWrapper>
   ) : (
       <ImageTextWrapper ref={imageTextRef}>
         <Content contents={contents} />
-        <StyledImage fluid={image} />
+        <Image fluid={image} />
       </ImageTextWrapper>
     )
 }
@@ -22,13 +22,13 @@ const Content = ({ contents }) => {
   const { title, content, subscript } = contents
 
   return (
-    <ContentContainer>
+    <div>
       {title ? <h1>{title}</h1> : null}
       <p>{content}</p>
       <SubscriptContainer>
         <SubscriptParagraph>{subscript}</SubscriptParagraph>
       </SubscriptContainer>
-    </ContentContainer>
+    </div>
   )
 }
 
@@ -38,27 +38,9 @@ const SubscriptContainer = styled.div`
 `
 
 const ImageTextWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: ${props => (props.wrapReverse ? "wrap-reverse" : "wrap")};
-
-  > *{
-    flex-grow:1;
-  }
-  & > :first-child{
-    margin-right:5%;
-  }
-`
-
-const StyledImage = styled(Image)`
-  width:40%;
-  min-width:300px;
-`
-
-const ContentContainer = styled.div`
-  width: 40%;
-  min-width: 300px;
+display: grid;
+grid-template-columns: repeat(auto-fit,minmax(300px, 1fr));
+grid-gap:5%;
 `
 
 export default ImageText

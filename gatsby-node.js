@@ -7,9 +7,9 @@ exports.createPages = async function ({ actions, graphql }) {
             }
         }
 
-        allWIneries: allAirtable(filter: {table: {eq: "Wineries"}}){
-            nodes{
-                id:recordId
+        allWineries: allAirtable(filter: {table: {eq: "Wineries"}}){
+            nodes {
+                id: recordId
             }
         }
     }      
@@ -25,7 +25,7 @@ exports.createPages = async function ({ actions, graphql }) {
         })
     })
 
-    data.allWines.nodes.forEach(node => {
+    data.allWineries.nodes.forEach(node => {
         const wineryId = node.id
 
         actions.createPage({

@@ -13,7 +13,7 @@ import useScroll from "../hooks/use-scroll"
 
 const WineCardsGrid = styled.div`
   display:grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap:80px;
   justify-items:center;
 `
@@ -51,8 +51,9 @@ const Collection = ({ data }) => {
           {filteredWines.map(x => <WineCard
             key={x.id}
             name={x.Name}
-            description={x.Description}
-            image={x.Image.localFiles[0].childImageSharp.fixed} />)}
+            description={x.ShortDescription}
+            image={x.Image.localFiles[0].childImageSharp.fixed}
+            link={x.id} />)}
         </WineCardsGrid> : null}
     </Layout>
   )
@@ -67,6 +68,7 @@ export const query = graphql`
       }
     }
   }
+
   winery: file(relativePath: {regex: "/winery/"}) {
     childImageSharp {
       fixed(width: 350, height: 220) {
@@ -74,12 +76,13 @@ export const query = graphql`
       }
     }
   }
+
   allWines: allAirtable(filter: {table: {eq: "Wines"}}) {
     nodes {
       id: recordId
       data {
         Name
-        Description
+        ShortDescription
         Image {
           localFiles {
             childImageSharp {
@@ -92,6 +95,7 @@ export const query = graphql`
       }
     }
   }
+
   site {
     siteMetadata {
       title

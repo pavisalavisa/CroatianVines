@@ -75,17 +75,23 @@ module.exports = {
     {
       resolve: `gatsby-source-airtable`,
       options: {
-        apiKey: process.env.AIRTABLE_API_KEY, // may instead specify via env, see below
+        apiKey: process.env.AIRTABLE_API_KEY,
         tables: [
           {
             baseId: `app1YxhjCyOseAVb1`,
             tableName: `Wines`,
-            mapping: { Image: `fileNode` }, // optional, e.g. "text/markdown", "fileNode"
+            mapping: { Image: `fileNode` },
+            tableLinks: [`Contents`],
           },
           {
             baseId: `app1YxhjCyOseAVb1`,
             tableName: `Wineries`,
             mapping: { Image: `fileNode` },
+          },
+          {
+            baseId: `app1YxhjCyOseAVb1`,
+            tableName: `Contents`,
+            mapping: { Image: `fileNode` }
           }
         ]
       }

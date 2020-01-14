@@ -7,9 +7,14 @@ import Navigation from "./navigation"
 import Footer from "./footer"
 
 const StyledMain = styled.main`
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  align-items:center;
+
   > * {
-    width:90%;
-    margin:5% 5% 0 5%;
+    width:80%;
+    margin-top:5%; 
   }
 `
 

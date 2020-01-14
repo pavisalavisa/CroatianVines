@@ -4,9 +4,9 @@ import Img from "gatsby-image"
 import styled from "styled-components"
 
 export const ImageLink = ({ imagePath, to }) => (
-    <Link to={to}>
-        <Img fixed={imagePath} />
-    </Link>
+  <Link to={to}>
+    <Img fixed={imagePath} />
+  </Link>
 )
 
 export const AnchorLink = styled.a`

@@ -11,7 +11,7 @@ import WinerySuggestions from "../components/winery/winerySuggestions"
 import { CenteredParagraph } from "../components/common/paragraphs"
 import Divider from "../components/common/divider"
 import useScroll from "../hooks/use-scroll"
-import {AnchorLink} from "../components/common/link"
+import { AnchorLink } from "../components/common/link"
 
 const Learn = ({ data }) => {
   const images = data.images.nodes
@@ -50,21 +50,21 @@ const Learn = ({ data }) => {
       <ImageText
         mirrored
         image={images.find(image => image.fluid.src.includes("step1Image")).fluid}
-        content={contents.find(content => content.frontmatter.title.toLowerCase().includes("first"))}
+        contents={contents.find(content => content.frontmatter.title.toLowerCase().includes("first")).frontmatter}
         imageTextRef={scrollSteps[0].elementRef}
       />
       <ImageText
         image={images.find(image => image.fluid.src.includes("step2Image")).fluid}
-        content={contents.find(content => content.frontmatter.title.toLowerCase().includes("second"))}
+        contents={contents.find(content => content.frontmatter.title.toLowerCase().includes("second")).frontmatter}
         imageTextRef={scrollSteps[1].elementRef}
       />
       <ImageText
         mirrored
         image={images.find(image => image.fluid.src.includes("step3Image")).fluid}
-        content={contents.find(content => content.frontmatter.title.toLowerCase().includes("third"))}
+        contents={contents.find(content => content.frontmatter.title.toLowerCase().includes("third")).frontmatter}
         imageTextRef={scrollSteps[2].elementRef}
       />
-      <Divider margin="5%" />
+      <Divider margin="5% 10%" />
       <CenteredParagraph>Our winemakers are eager to see you. Allow them to share their secrets with you.
 Book a winery tour with us!</CenteredParagraph>
       <WinerySuggestions />
@@ -73,14 +73,10 @@ Book a winery tour with us!</CenteredParagraph>
 }
 
 const WinemakingProcessSteps = styled(FlexRow)`
-  margin-top:0;
-  margin-left:0;
   > * {
     width:250px;
-    margin-left:5%;
-    margin-top:5%;
     flex-grow: 1;
-    min-width:300px;
+    margin:2.5%
   }
   align-items:flex-start;
   flex-wrap: wrap;

@@ -1,9 +1,9 @@
 import Typography from "typography"
 
 const typography = new Typography({
-  baseFontSize: "18px",
+  baseFontSize: "20px",
   baseLineHeight: 1.5,
-  scaleRatio: 3,
+  scaleRatio: 4,
   headerFontFamily: [
     "Montserrat",
     "Avenir Next",

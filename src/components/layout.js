@@ -16,6 +16,12 @@ const StyledMain = styled.main`
     width:80%;
     margin-top:5%; 
   }
+
+  @media screen and (max-width: 640px){
+    > * {
+    width:90%;
+    }
+  }
 `
 
 const Layout = ({ children }) => {

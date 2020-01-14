@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { graphql } from "gatsby"
 import styled from "styled-components"
 import HeroImage from "../components/heroImage"
 import LabeledText from "../components/common/labeledText"
@@ -13,8 +14,8 @@ import useScroll from "../hooks/use-scroll"
 
 const WineCardsGrid = styled.div`
   display:grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap:80px;
+  grid-template-columns: repeat(auto-fill, minmax(325px, 1fr));
+  grid-gap:5vw;
   justify-items:center;
 `
 

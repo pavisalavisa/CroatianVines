@@ -6,13 +6,13 @@ import ImageText from "../components/imageText"
 import Divider from "../components/common/divider"
 import HeroImage from "../components/heroImage"
 import Image from "gatsby-image"
+import { useState } from "react"
 import { Link } from "gatsby"
+import { StyledH1 } from "../components/common/headers"
+import Comments from "../components/comments"
+import Ratings from '../components/common/ratings';
 
 //TODO: Cleanup and refactor margins
-
-const Title = styled.h1`
-    text-align:center;
-`
 
 const WhiteH1 = styled.h1`
   text-align:center;
@@ -54,20 +54,25 @@ export default ({ data }) => {
   const secondBlockContent = { content: wine.Contents[2].data.Content, subscript: wine.Contents[1].data.Subscript }
   const secondBlockImage = wine.Contents[2].data.Image
   const bottomHeroImage = data.bottomHeroImage.childImageSharp
+  const [rating, setRating] = useState(0);
 
   return (
     <Layout>
-      <Title>{wine.Name}</Title>
+      <StyledH1 centered>{wine.Name}</StyledH1>
       <p>{introductionParagraph}</p>
       <Divider margin="0 10%" />
       <ImageText contents={firstBlockContent} image={firstBlockImage.localFiles[0].childImageSharp.fluid} mirrored />
       <ImageText contents={secondBlockContent} image={secondBlockImage.localFiles[0].childImageSharp.fluid} />
-      <Image fluid={bottomHeroImage} ></Image>
+      <StyledH1 centered>How do you like this wine?</StyledH1>
+      <Divider margin="0 10%" />
+      <Ratings rating={rating}
+        changeRating={setRating} />
+      <Comments commentsList={[{ name: 'Patrick Star', content: 'loremipsum' }]} />
       <HeroImage
         height="75vh"
         fluid={bottomHeroImage.fluid}
       >
-        <BrowseCollection></BrowseCollection>
+        <BrowseCollection />
       </HeroImage>
     </Layout>
   )

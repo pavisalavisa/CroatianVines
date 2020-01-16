@@ -11,6 +11,7 @@ import { StyledH1 } from "../components/common/headers"
 import { FlexRow } from "../components/common/container"
 import { defaultUserImage } from "../images/defaultUserImage.svg"
 import StyledButton from "../components/common/button"
+import ResizableTextBox from "../components/common/resizableTextBox"
 
 const CommentsContainer = styled.div`
     display:grid;
@@ -28,28 +29,14 @@ const UserCommentImage = styled.img`
     margin:25px 25px 0 0;
 `
 
-const CommentInput = styled.input`
-    padding:0.5rem 1.25rem;
-    position:relative;
-    border:none;
-    border-bottom: 1px solid rgba(0,0,0,0.3);
-    outline:none;
-    flex-grow:1;
-    font-size:${props => props.fontSize ? props.fontSize : "100%"};
-    margin-top:25px;
-    &:focus{
-        border-bottom: 2px solid #333333;
-    }
-`
-
 const CommentEditor = ({ }) => {
     return (<div>
         <FlexRow alignItems="flex-start">
             <UserCommentImage alt="avatar" src={defaultUserImage} />
-            <CommentInput placeholder="Add a public opinion" />
+            <ResizableTextBox rows={1} placeholder="Add a public opinion" />
         </FlexRow>
         <FlexRow justifyContent="flex-end">
-            <StyledButton margin="0 2.5% 0 0" primary>
+            <StyledButton margin="0 2.5% 0 0" secondary>
                 Cancel
             </StyledButton>
             <StyledButton>

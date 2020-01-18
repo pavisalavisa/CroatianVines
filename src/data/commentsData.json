@@ -1,0 +1,29 @@
+{
+    "commentsList": [
+        {
+            "name": "John von Neumann",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+            "image": "https://randomuser.me/api/portraits/thumb/men/75.jpg"
+        },
+        {
+            "name": "Robert Oppenheimer",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+            "image": "https://randomuser.me/api/portraits/thumb/men/35.jpg"
+        },
+        {
+            "name": "Ada Lovelace",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+            "image": "https://randomuser.me/api/portraits/thumb/women/71.jpg"
+        },
+        {
+            "name": "Patrick Star",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+            "image": "https://randomuser.me/api/portraits/thumb/men/55.jpg"
+        },
+        {
+            "name": "Donald Knuth",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+            "image": "https://randomuser.me/api/portraits/thumb/men/11.jpg"
+        }
+    ]
+}

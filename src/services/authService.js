@@ -1,4 +1,4 @@
-let authenticated = true
+let authenticated = false
 
 export const logIn = (username, password) => {
     authenticated = true

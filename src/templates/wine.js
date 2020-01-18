@@ -9,28 +9,28 @@ import { useState } from "react"
 import { Link } from "gatsby"
 import { StyledH1 } from "../components/common/headers"
 import Comments from "../components/comments/comments"
-import Ratings from '../components/common/ratings';
+import Ratings from "../components/common/ratings"
 
 const WhiteH1 = styled.h1`
-  text-align:center;
-  color:white;
-  font-size:${props => props.fontSize ? props.fontSize : null};
+  text-align: center;
+  color: white;
+  font-size: ${props => (props.fontSize ? props.fontSize : null)};
 `
 
 const StyledLink = styled(Link)`
-  background:rgba(255,255,255,0.3);
-  text-decoration:none;
-  font-size:400%;
-  font-weight:bold;
-  color:white;
+  background: rgba(255, 255, 255, 0.3);
+  text-decoration: none;
+  font-size: 400%;
+  font-weight: bold;
+  color: white;
   border: 3px solid white;
-  padding:1rem 2rem;
-  border-radius:6px;
-  margin-top:3rem;
+  padding: 1rem 2rem;
+  border-radius: 6px;
+  margin-top: 3rem;
 
-  &:hover{
-    border: 5px solid #5B0B0B;
-    background:rgb(91,11,11,0.3);
+  &:hover {
+    border: 5px solid #5b0b0b;
+    background: rgb(91, 11, 11, 0.3);
   }
 `
 
@@ -48,7 +48,7 @@ export default ({ data }) => {
   const contents = wine.Contents.slice(1, wine.Contents.length)
   const bottomHeroImage = data.bottomHeroImage.childImageSharp
   const commentsList = data.dataJson.commentsList
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(0)
 
   return (
     <Layout>
@@ -59,20 +59,15 @@ export default ({ data }) => {
         <ImageText
           contents={{ content: c.data.Content, subscript: c.data.Subscript }}
           image={c.data.Image.localFiles[0].childImageSharp.fluid}
-          mirrored={i % 2} />
+          mirrored={i % 2}
+        />
       ))}
       <div>
         <StyledH1 centered>How do you like this wine?</StyledH1>
-        <Ratings
-          rating={rating}
-          changeRating={setRating} />
+        <Ratings rating={rating} changeRating={setRating} />
         <Comments commentsList={commentsList} />
       </div>
-      <HeroImage
-        margin="10% 0 0 0"
-        height="75vh"
-        fluid={bottomHeroImage.fluid}
-      >
+      <HeroImage margin="10% 0 0 0" height="75vh" fluid={bottomHeroImage.fluid}>
         <BrowseCollection />
       </HeroImage>
     </Layout>
@@ -80,31 +75,31 @@ export default ({ data }) => {
 }
 
 export const query = graphql`
-query query ($wineId: String!){
-
-  bottomHeroImage: file(relativePath: {in: "wine-bottomHeroImage.jpg"}) {
-    childImageSharp {
-      fluid(quality: 100) {
-        ...GatsbyImageSharpFluid
+  query query($wineId: String!) {
+    bottomHeroImage: file(relativePath: { in: "wine-bottomHeroImage.jpg" }) {
+      childImageSharp {
+        fluid(quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
       }
     }
-  }
 
-  wine: airtable(table: {eq: "Wines"}, recordId: {eq: $wineId}) {
-    id: recordId
-    data {
-      Name
-      ShortDescription
-      Contents {
-        data {
-          BlockNumber
-          Content
-          Subscript
-          Image {
-            localFiles {
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid
+    wine: airtable(table: { eq: "Wines" }, recordId: { eq: $wineId }) {
+      id: recordId
+      data {
+        Name
+        ShortDescription
+        Contents {
+          data {
+            BlockNumber
+            Content
+            Subscript
+            Image {
+              localFiles {
+                childImageSharp {
+                  fluid {
+                    ...GatsbyImageSharpFluid
+                  }
                 }
               }
             }
@@ -112,15 +107,14 @@ query query ($wineId: String!){
         }
       }
     }
-  }
-  
-  dataJson {
-    commentsList {
-      id
-      name
-      image
-      content
+
+    dataJson {
+      commentsList {
+        id
+        name
+        image
+        content
+      }
     }
-  } 
-}
+  }
 `

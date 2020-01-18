@@ -8,21 +8,27 @@ import ResizableTextBox from "../common/resizableTextBox"
 import UserCommentImage from "./userCommentImage"
 import { isAuthenticated } from "../../services/authService"
 import nanoid from "nanoid"
+import Modal from "../common/modal"
+import AuthenticationForm from "../authenticationForm"
 
 const CommentEditorContainer = styled.div`
   margin-bottom: 5%;
 `
 
-export default ({ postCommentAction }) => {
+export default ({ postCommentAction, authenticationRequired }) => {
   const [buttonsHidden, setButtonsHidden] = useState(true)
   const [textAreaText, setTextAreaText] = useState("")
+  const [displayLoginModal, setDisplayLoginModal] = useState(false)
   const inputRef = useRef(null)
 
   const handleInputFocus = () => {
+    if (!authenticationRequired) return
+
     if (isAuthenticated()) {
       setButtonsHidden(false)
     } else {
-      // displayLogInForm()
+      setDisplayLoginModal(true)
+      console.log("Display log in fomr")
       inputRef.current.blur()
     }
   }
@@ -44,6 +50,12 @@ export default ({ postCommentAction }) => {
 
   return (
     <CommentEditorContainer>
+      <Modal
+        show={displayLoginModal}
+        handleClose={() => setDisplayLoginModal(false)}
+      >
+        <AuthenticationForm />
+      </Modal>
       <FlexRow alignItems="flex-start">
         <UserCommentImage alt="avatar" src={DefaultUserImage} />
         <ResizableTextBox

@@ -32,8 +32,9 @@ export default ({ commentsList }) => {
   const [comments, setComments] = useState(commentsList)
 
   return (
-    <div>
+    <>
       <CommentEditor
+        authenticationRequired
         postCommentAction={newComment =>
           setComments(comment => [newComment, ...comment])
         }
@@ -45,6 +46,6 @@ export default ({ commentsList }) => {
           </FadeIn>
         ))}
       </CommentsContainer>
-    </div>
+    </>
   )
 }

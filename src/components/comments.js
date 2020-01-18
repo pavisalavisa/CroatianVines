@@ -1,25 +1,31 @@
 import React from "react"
-import { graphql } from "gatsby"
-import Layout from "../components/layout"
 import styled from "styled-components"
-import ImageText from "../components/imageText"
-import Divider from "../components/common/divider"
-import HeroImage from "../components/heroImage"
-import Image from "gatsby-image"
-import { Link } from "gatsby"
-import { StyledH1 } from "../components/common/headers"
 import { FlexRow } from "../components/common/container"
-import { defaultUserImage } from "../images/defaultUserImage.svg"
+import DefaultUserImage from "../images/defaultUserImage.svg"
 import StyledButton from "../components/common/button"
 import ResizableTextBox from "../components/common/resizableTextBox"
 
 const CommentsContainer = styled.div`
     display:grid;
-    grid-template-rows:repeat(auto-fit, 125px);
-    grid-gap:2.5%;
+    grid-template-rows:1fr;
+    grid-auto-rows:1fr; 
+    grid-gap:2.5vh;
 `
 
-const SingleComment = styled.div``
+const CommentContentContainer = styled.div`
+    flex-grow:1;
+    margin-top:25px;
+`
+
+const SingleComment = ({ name, content, image }) => (
+    <FlexRow alignItems="flex-start">
+        <UserCommentImage alt="avatar" src={image} />
+        <CommentContentContainer>
+            <h4>{name}</h4>
+            <p>{content}</p>
+        </CommentContentContainer>
+    </FlexRow>
+)
 
 const UserCommentImage = styled.img`
     border-radius:50%;
@@ -32,8 +38,11 @@ const UserCommentImage = styled.img`
 const CommentEditor = ({ }) => {
     return (<div>
         <FlexRow alignItems="flex-start">
-            <UserCommentImage alt="avatar" src={defaultUserImage} />
-            <ResizableTextBox rows={1} placeholder="Add a public opinion" />
+            <UserCommentImage alt="avatar" src={DefaultUserImage} />
+            <ResizableTextBox
+                rows={1}
+                placeholder="Add a public opinion"
+                onChange={(e) => console.log('Changed')} />
         </FlexRow>
         <FlexRow justifyContent="flex-end">
             <StyledButton margin="0 2.5% 0 0" secondary>
@@ -47,19 +56,17 @@ const CommentEditor = ({ }) => {
     </div>)
 }
 
-export default ({ commentsList }) => {
+export default ({ commentsList }) => (
+    <div>
+        <CommentEditor />
+        <CommentsContainer>
+            {commentsList.map((c, i) =>
+                <SingleComment
+                    key={i}
+                    name={c.name}
+                    content={c.content}
+                    image={c.image} />)}
+        </CommentsContainer>
+    </div>
+)
 
-    return (
-        <>
-            <CommentEditor />
-            <CommentsContainer>
-                {commentsList.map((c, i) =>
-                    <SingleComment
-                        key={i}
-                        name={c.name}
-                        content={c.content}
-                        image={c.image} />)}
-            </CommentsContainer>
-        </>)
-
-}

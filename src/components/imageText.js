@@ -31,7 +31,7 @@ const ImageTextWrapper = styled.div`
 display: grid;
 grid-template-columns: repeat(auto-fit,minmax(300px, 1fr));
 grid-template-rows: 1fr;
-grid-gap:2.5%;
+grid-gap:7.5vw;
 
 @media screen and (max-width: 1000px){
     grid-template-columns: 1fr;

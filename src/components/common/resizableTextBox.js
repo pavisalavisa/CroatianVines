@@ -2,7 +2,6 @@ import React from "react"
 import styled from "styled-components"
 import TextareaAutosize from 'react-autosize-textarea';
 
-
 const StyledTextArea = styled(TextareaAutosize)`
     padding:0.5rem;
     resize:none;
@@ -12,6 +11,7 @@ const StyledTextArea = styled(TextareaAutosize)`
     border-bottom: 1px solid rgba(0,0,0,0.3);
     outline:none;
     flex-grow:1;
+    color:#333333;
     font-size:${props => props.fontSize ? props.fontSize : "100%"};
     margin: 25px 0 25px 0;
     &:focus{
@@ -19,9 +19,7 @@ const StyledTextArea = styled(TextareaAutosize)`
     }
 `
 
-export default (props) => {
-
-    return (<StyledTextArea
-        rows={1}
-        {...props} />)
-}
+export default (props) => (<StyledTextArea
+    rows={props.rows}
+    onChange={props.onChange}
+    {...props} />)

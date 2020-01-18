@@ -69,6 +69,7 @@ export default ({ data }) => {
         <Comments commentsList={commentsList} />
       </div>
       <HeroImage
+        margin="10% 0 0 0"
         height="75vh"
         fluid={bottomHeroImage.fluid}
       >

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { forwardRef } from "react"
 import styled from "styled-components"
 import TextareaAutosize from 'react-autosize-textarea';
 
@@ -19,7 +19,9 @@ const StyledTextArea = styled(TextareaAutosize)`
     }
 `
 
-export default (props) => (<StyledTextArea
+export default forwardRef((props, ref) => (<StyledTextArea
+    ref={ref}
     rows={props.rows}
     onChange={props.onChange}
-    {...props} />)
+    {...props} />))
+

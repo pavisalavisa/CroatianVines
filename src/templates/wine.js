@@ -8,7 +8,7 @@ import HeroImage from "../components/heroImage"
 import { useState } from "react"
 import { Link } from "gatsby"
 import { StyledH1 } from "../components/common/headers"
-import Comments from "../components/comments"
+import Comments from "../components/comments/comments"
 import Ratings from '../components/common/ratings';
 
 const WhiteH1 = styled.h1`

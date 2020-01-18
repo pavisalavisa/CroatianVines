@@ -116,6 +116,7 @@ query query ($wineId: String!){
   
   dataJson {
     commentsList {
+      id
       name
       image
       content

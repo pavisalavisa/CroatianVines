@@ -2,7 +2,7 @@ import React from "react"
 import HeroImage from "../components/heroImage"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import LabeledText from "../components/common/labeledText"
+import { StyledH1 } from "../components/common/headers"
 import Image from "gatsby-image"
 import FlexRow from "../components/common/container"
 import styled from "styled-components"
@@ -25,48 +25,76 @@ const Learn = ({ data }) => {
   return (
     <Layout>
       <SEO title="Learn" />
-      <HeroImage fluid={heroImage.fixed} height="400px" >
-        <LabeledText text={"How do we do it?"} width="100%" />
+      <HeroImage fluid={heroImage.fixed} height="400px">
+        <StyledH1 centered secondaryColor fontSize="400%">
+          How do we do it?
+        </StyledH1>
       </HeroImage>
 
       <WinemakingProcessSteps>
-        {miniStepContents.sort((a, b) => a.frontmatter.ordinalNumber - b.frontmatter.ordinalNumber).map(miniStep => (
-          <MiniStepInfo
-            key={miniStep.frontmatter.ordinalNumber}
-            title={miniStep.frontmatter.title}
-            content={miniStep.frontmatter.content}
-            icon={
-              icons.find(icon =>
-                icon.fixed.originalName.includes(
-                  miniStep.frontmatter.ordinalNumber
-                )
-              ).fixed
-            }
-            onLearnMoreClick={scrollSteps[miniStep.frontmatter.ordinalNumber - 1].scroll}
-          />
-        ))}
+        {miniStepContents
+          .sort(
+            (a, b) => a.frontmatter.ordinalNumber - b.frontmatter.ordinalNumber
+          )
+          .map(miniStep => (
+            <MiniStepInfo
+              key={miniStep.frontmatter.ordinalNumber}
+              title={miniStep.frontmatter.title}
+              content={miniStep.frontmatter.content}
+              icon={
+                icons.find(icon =>
+                  icon.fixed.originalName.includes(
+                    miniStep.frontmatter.ordinalNumber
+                  )
+                ).fixed
+              }
+              onLearnMoreClick={
+                scrollSteps[miniStep.frontmatter.ordinalNumber - 1].scroll
+              }
+            />
+          ))}
       </WinemakingProcessSteps>
       <Divider />
       <ImageText
         mirrored
-        image={images.find(image => image.fluid.src.includes("step1Image")).fluid}
-        contents={contents.find(content => content.frontmatter.title.toLowerCase().includes("first")).frontmatter}
+        image={
+          images.find(image => image.fluid.src.includes("step1Image")).fluid
+        }
+        contents={
+          contents.find(content =>
+            content.frontmatter.title.toLowerCase().includes("first")
+          ).frontmatter
+        }
         imageTextRef={scrollSteps[0].elementRef}
       />
       <ImageText
-        image={images.find(image => image.fluid.src.includes("step2Image")).fluid}
-        contents={contents.find(content => content.frontmatter.title.toLowerCase().includes("second")).frontmatter}
+        image={
+          images.find(image => image.fluid.src.includes("step2Image")).fluid
+        }
+        contents={
+          contents.find(content =>
+            content.frontmatter.title.toLowerCase().includes("second")
+          ).frontmatter
+        }
         imageTextRef={scrollSteps[1].elementRef}
       />
       <ImageText
         mirrored
-        image={images.find(image => image.fluid.src.includes("step3Image")).fluid}
-        contents={contents.find(content => content.frontmatter.title.toLowerCase().includes("third")).frontmatter}
+        image={
+          images.find(image => image.fluid.src.includes("step3Image")).fluid
+        }
+        contents={
+          contents.find(content =>
+            content.frontmatter.title.toLowerCase().includes("third")
+          ).frontmatter
+        }
         imageTextRef={scrollSteps[2].elementRef}
       />
       <Divider margin="5% 10%" />
-      <CenteredParagraph>Our winemakers are eager to see you. Allow them to share their secrets with you.
-Book a winery tour with us!</CenteredParagraph>
+      <CenteredParagraph>
+        Our winemakers are eager to see you. Allow them to share their secrets
+        with you. Book a winery tour with us!
+      </CenteredParagraph>
       <WinerySuggestions />
     </Layout>
   )
@@ -74,11 +102,11 @@ Book a winery tour with us!</CenteredParagraph>
 
 const WinemakingProcessSteps = styled(FlexRow)`
   > * {
-    width:250px;
+    width: 250px;
     flex-grow: 1;
-    margin:2.5%
+    margin: 2.5%;
   }
-  align-items:flex-start;
+  align-items: flex-start;
   flex-wrap: wrap;
 `
 
@@ -98,7 +126,7 @@ const RoundImageWithBorder = styled(Image)`
 
 export const query = graphql`
   {
-    heroImage: file(relativePath: {in: "learn-heroImage.jpg"}) {
+    heroImage: file(relativePath: { in: "learn-heroImage.jpg" }) {
       childImageSharp {
         fixed(quality: 100, height: 2800, width: 4200) {
           ...GatsbyImageSharpFixed
@@ -143,7 +171,9 @@ export const query = graphql`
       }
     }
 
-    contents:  allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/(learn)/step/"}}) {
+    contents: allMarkdownRemark(
+      filter: { fileAbsolutePath: { regex: "/(learn)/step/" } }
+    ) {
       nodes {
         frontmatter {
           title
@@ -152,7 +182,7 @@ export const query = graphql`
         }
       }
     }
-  
+
     site {
       siteMetadata {
         title

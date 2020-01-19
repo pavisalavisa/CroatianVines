@@ -5,6 +5,7 @@ import HeroImage from "../components/heroImage"
 import ImageText from "../components/imageText"
 import { TransparentTextButton } from "../components/common/button"
 import { StyledH1 } from "../components/common/headers"
+import { navigate } from "@reach/router"
 
 const IndexPage = ({ data }) => {
   const heroImage = data.heroImage.childImageSharp
@@ -21,9 +22,13 @@ const IndexPage = ({ data }) => {
       <HeroImage fluid={heroImage.fixed} height="80vh">
         <div>
           <StyledH1 centered secondaryColor fontSize="400%">
-            Explore Croatia's bottled poetry
+            Discover Croatia's bottled poetry
           </StyledH1>
-          <TransparentTextButton fontSize="250%" margin="5% 0 0 0">
+          <TransparentTextButton
+            onClick={() => navigate(`/collection/`)}
+            fontSize="250%"
+            margin="5% 0 0 0"
+          >
             Wine collection
           </TransparentTextButton>
         </div>

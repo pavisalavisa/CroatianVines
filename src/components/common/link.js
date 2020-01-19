@@ -12,5 +12,6 @@ export const ImageLink = ({ imagePath, to }) => (
 export const AnchorLink = styled.a`
   color: #5b0b0b;
   font-weight: bold;
-  cursor:pointer;
+  cursor: pointer;
+  padding: 2rem 2rem 2rem 0;
 `

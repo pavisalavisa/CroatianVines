@@ -10,7 +10,11 @@ import React from "react"
 import styled from "styled-components"
 import { ImageLink } from "./common/link"
 import StyledButton from "./common/button"
-import { FlexRow, underlinedContainerStyle } from "./common/container"
+import {
+  FlexRow,
+  underlinedContainerStyle,
+  hoverAnimationStyle,
+} from "./common/container"
 import more from "../images/more.svg"
 
 const StyledHeader = styled.header`
@@ -59,13 +63,11 @@ const MoreButtonContainer = styled(props => <div {...props} />)`
   width: ${props => (props.width ? props.width : "50px")};
   padding: 0 1rem;
   cursor: pointer;
-  &:hover {
-    background-color: #5b0b0b;
-  }
 `
 
 const MoreButtonIcon = styled.img`
-  stroke: red;
+  filter: invert(17%) sepia(19%) saturate(4506%) hue-rotate(330deg)
+    brightness(82%) contrast(113%);
   height: 5vh;
   max-width: 1rem;
   margin: 0;

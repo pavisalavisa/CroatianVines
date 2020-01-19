@@ -1,6 +1,9 @@
 import { Link } from "gatsby"
 import { useRef, useState, useEffect } from "react"
-import { useResponsiveMenu, useOnOutsideEvent } from "../hooks/use-responsive-menu"
+import {
+  useResponsiveMenu,
+  useOnOutsideEvent,
+} from "../hooks/use-responsive-menu"
 
 import PropTypes from "prop-types"
 import React from "react"
@@ -11,85 +14,87 @@ import { FlexRow, underlinedContainerStyle } from "./common/container"
 import more from "../images/more.svg"
 
 const StyledHeader = styled.header`
-  background:white;
-  margin: 0 2rem 0rem 2rem;
+  background: white;
   padding: 0;
+  box-shadow: 0 0 10px 0 rgb(126, 34, 66, 0.3);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 999;
 `
 
 const StyledMenuItem = styled(Link)`
   ${underlinedContainerStyle}
 
   color: #5B0B0B;
-  padding:0.5rem;
-  text-decoration:none;
-`;
+  padding: 0.5rem;
+  text-decoration: none;
+`
 
 const StyledNav = styled.nav`
-  display:flex;
-  box-sizing:border-box;
+  display: flex;
+  box-sizing: border-box;
   justify-content: flex-end;
-  flex:1 1 auto;
-  visibility:${props => props.visibility};
-  overflow-x:hidden;
+  flex: 1 1 auto;
+  visibility: ${props => props.visibility};
+  overflow-x: hidden;
 `
 
 const Triangle = styled.div`
-  position:absolute;
-  top:-12px;
-  right:13px;
-  width:22px;
-  height:22px;
-  border:1px solid rgba(0,0,0,0.3);
-  transform:rotate(135deg);
-  background-color:white;
+  position: absolute;
+  top: -12px;
+  right: 13px;
+  width: 22px;
+  height: 22px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  transform: rotate(135deg);
+  background-color: white;
 `
 
 const MoreButtonContainer = styled(props => <div {...props} />)`
-  display:flex;
-  flex-shrink:0;
-  justify-content:center;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
   align-items: center;
-  width:${props => props.width ? props.width : "50px"};
+  width: ${props => (props.width ? props.width : "50px")};
   padding: 0 1rem;
   cursor: pointer;
-  &:hover{
-    background-color:#5B0B0B;
+  &:hover {
+    background-color: #5b0b0b;
   }
 `
 
 const MoreButtonIcon = styled.img`
   stroke: red;
   height: 5vh;
-  max-width:1rem;
-  margin:0;
+  max-width: 1rem;
+  margin: 0;
 `
 
-const MoreButton = (props) =>
-  (
-    <MoreButtonContainer {...props}>
-      <MoreButtonIcon src={more} />
-    </MoreButtonContainer>
-  )
+const MoreButton = props => (
+  <MoreButtonContainer {...props}>
+    <MoreButtonIcon src={more} />
+  </MoreButtonContainer>
+)
 
 const HiddenItemsContainer = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: column;
-  position:absolute;
-  top:${props => props.menu.offset + props.spaceForTriangle}px;
-  padding:2px;
-  z-index:${props => props.zIndex};
-  min-width:${props => props.minWidth}px;
-  background-color:white;
-  border:1px solid rgba(0,0,0,0.3);
+  position: absolute;
+  top: ${props => props.menu.offset + props.spaceForTriangle}px;
+  padding: 2px;
+  z-index: ${props => props.zIndex};
+  min-width: ${props => props.minWidth}px;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.3);
 `
 
-const VisibleItems = ({ visibleItems }) => (
+const VisibleItems = ({ visibleItems }) =>
   visibleItems.map(menuItem => (
     <StyledMenuItem key={visibleItems.indexOf(menuItem)} to={menuItem.path}>
       {menuItem.text.toUpperCase()}
     </StyledMenuItem>
   ))
-)
 
 const HiddenItems = ({
   menu,
@@ -101,7 +106,13 @@ const HiddenItems = ({
   const { innerBorderRef } = useOnOutsideEvent(handleOutsideClick)
 
   return (
-    <HiddenItemsContainer ref={innerBorderRef} menu={menu} minWidth={minWidth} spaceForTriangle={spaceForTriangle} zIndex={zIndex}>
+    <HiddenItemsContainer
+      ref={innerBorderRef}
+      menu={menu}
+      minWidth={minWidth}
+      spaceForTriangle={spaceForTriangle}
+      zIndex={zIndex}
+    >
       <Triangle />
       {menu.hiddenItems.map(menuItem => (
         <StyledMenuItem
@@ -139,29 +150,47 @@ const MenuItems = ({ menuItems }) => {
     <StyledNav ref={containerRef}>
       <VisibleItems visibleItems={menu.visibleItems} />
       {!isHiddenEmpty && <MoreButton onClick={handleMoreClick} />}
-      {!isHiddenEmpty && (open && (<HiddenItems menu={menu} handleOutsideClick={handleOutsideClick} />))}
+      {!isHiddenEmpty && open && (
+        <HiddenItems menu={menu} handleOutsideClick={handleOutsideClick} />
+      )}
     </StyledNav>
   )
 }
 
-const loggedIn = true;
+const loggedIn = true
 
-const AccountSection = () => (
-  loggedIn ?
+const AccountSection = () =>
+  loggedIn ? (
     <FlexRow>
-      <StyledButton margin="0.5rem" primary onClick={() => console.log('Clicked log in!')}>Log in</StyledButton>
-      <StyledButton margin="0.5rem" onClick={() => console.log('Clicked register!')}>Register</StyledButton>
+      <StyledButton
+        margin="0.5rem"
+        primary
+        onClick={() => console.log("Clicked log in!")}
+      >
+        Log in
+      </StyledButton>
+      <StyledButton
+        margin="0.5rem"
+        onClick={() => console.log("Clicked register!")}
+      >
+        Register
+      </StyledButton>
     </FlexRow>
-    :
+  ) : (
     <FlexRow>
-      <StyledButton margin={"0.5rem"} primary onClick={() => console.log('Clicked log out!')}>Log out</StyledButton>
+      <StyledButton
+        margin={"0.5rem"}
+        primary
+        onClick={() => console.log("Clicked log out!")}
+      >
+        Log out
+      </StyledButton>
     </FlexRow>
-)
-
+  )
 
 const Navigation = ({ logo, menuItems }) => (
   <StyledHeader>
-    <FlexRow flexWrap="nowrap">
+    <FlexRow margin="0 2rem 0rem 2rem" flexWrap="nowrap">
       <ImageLink to="/" imagePath={logo} />
       <MenuItems menuItems={menuItems} />
     </FlexRow>

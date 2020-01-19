@@ -13,8 +13,8 @@ const LoginFormContainer = styled.div`
 `
 
 export default ({ onLogIn }) => {
-  const [username, setUsername] = useState(null)
-  const [password, setPassword] = useState(null)
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
   const [authError, setAuthError] = useState(null)
 
   const onLogInButtonClick = () => {

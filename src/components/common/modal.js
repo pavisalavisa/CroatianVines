@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import StyledButton from "../common/button"
+import { useOnOutsideEvent } from "../../hooks/use-responsive-menu"
 
 const ModalContainer = styled.div`
   position: fixed;
@@ -10,7 +11,7 @@ const ModalContainer = styled.div`
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
   z-index: 999;
-  display: ${props => (props.show ? "block" : "none")};
+  display: block;
 `
 
 const ModalContentContainer = styled.div`
@@ -26,13 +27,17 @@ const ModalContentContainer = styled.div`
   width: 500px;
 `
 
-export default ({ handleClose, show, children }) => (
-  <ModalContainer show={show}>
-    <ModalContentContainer>
-      {children}
-      <StyledButton margin="0 0 10% 0" secondary onClick={handleClose}>
-        Close
-      </StyledButton>
-    </ModalContentContainer>
-  </ModalContainer>
-)
+export default ({ handleClose, children }) => {
+  const { innerBorderRef } = useOnOutsideEvent(handleClose)
+
+  return (
+    <ModalContainer>
+      <ModalContentContainer ref={innerBorderRef}>
+        {children}
+        <StyledButton margin="0 0 10% 0" secondary onClick={handleClose}>
+          Close
+        </StyledButton>
+      </ModalContentContainer>
+    </ModalContainer>
+  )
+}

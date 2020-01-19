@@ -28,7 +28,6 @@ export default ({ postCommentAction, authenticationRequired }) => {
       setButtonsHidden(false)
     } else {
       setDisplayLoginModal(true)
-      console.log("Display log in fomr")
       inputRef.current.blur()
     }
   }
@@ -50,12 +49,11 @@ export default ({ postCommentAction, authenticationRequired }) => {
 
   return (
     <CommentEditorContainer>
-      <Modal
-        show={displayLoginModal}
-        handleClose={() => setDisplayLoginModal(false)}
-      >
-        <AuthenticationForm onLogIn={() => setDisplayLoginModal(false)} />
-      </Modal>
+      {displayLoginModal && (
+        <Modal handleClose={() => setDisplayLoginModal(false)}>
+          <AuthenticationForm onLogIn={() => setDisplayLoginModal(false)} />
+        </Modal>
+      )}
       <FlexRow alignItems="flex-start">
         <UserCommentImage alt="avatar" src={DefaultUserImage} />
         <ResizableTextBox

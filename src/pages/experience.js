@@ -55,7 +55,7 @@ const Experience = ({ data }) => {
         image={featuredWinery.Image.localFiles[0].childImageSharp.fluid}
       />
       <SearchBox
-        hint="Search for wineries (e.g. Ilocki podrumi)"
+        hint="e.g. Ilocki podrumi"
         onSearch={setCurrentSearchValue}
         onFocus={scroll}
       />

@@ -12,6 +12,7 @@ import useDebounce from "../hooks/use-debounce"
 import useScroll from "../hooks/use-scroll"
 
 const WineCardsGrid = styled.div`
+  margin-top: 5%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(325px, 1fr));
   grid-gap: 5vw;
@@ -47,7 +48,7 @@ const Collection = ({ data }) => {
         </StyledH1>
       </HeroImage>
       <SearchBox
-        hint="Search for vines (e.g. Istria)"
+        hint="e.g. Istria"
         onSearch={setCurrentSearchValue}
         onFocus={scroll}
       />

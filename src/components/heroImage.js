@@ -3,7 +3,7 @@ import styled from "styled-components"
 import Image from "gatsby-image"
 
 const HeroImage = props => (
-  <HeroImageWrapper>
+  <HeroImageWrapper {...props}>
     <BackgroundImage {...props} />
     <Overlay>{props.children}</Overlay>
   </HeroImageWrapper>
@@ -16,7 +16,7 @@ const HeroImageWrapper = styled.div`
   background: rgba(91,11,11,0.35) linear-gradient(360deg, #ffffff 0%, rgba(255, 255, 255, 0) 7.66%);
 
   &&&{
-    margin: 0;
+    margin: ${props => props.margin ? props.margin : 0};
     width:100%;
   }
 `

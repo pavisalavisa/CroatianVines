@@ -1,42 +1,39 @@
-import React from "react";
+import React from "react"
 import styled from "styled-components"
 import Image from "gatsby-image"
 import { EllipsisParagraph } from "../common/paragraphs"
+import { hoverAnimationStyle } from "../common/container"
 
-const MiniWineryCard = ({ image, name, description }) => (
-    <MiniWineryCardContainer>
-        <Image fixed={image} />
-        <h2>{name}</h2>
-        <EllipsisParagraph lineNumber={3} >{description}</EllipsisParagraph>
-    </MiniWineryCardContainer>
-)
-
-const MiniWineryCardContainer = styled.div`
-    display: inline-block;
-    vertical-align: middle;
-    -webkit-transform: perspective(1px) translateZ(0);
-    transform: perspective(1px) translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    -webkit-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-    -webkit-transition-property: transform;
-    transition-property: transform;
-
-    &:hover, &:focus, &:active {
-        -webkit-transform: scale(1.1);
-        transform: scale(1.1);
-        cursor: pointer;
-    }
-
-    & > h2,p{
-        margin:1rem;
-    }
-    
-    box-sizing:content-box;
-
-    width:350px;
-    height:400px;
-    border: 1px solid rgba(0,0,0,0.3);
+const WineryImage = styled(Image)`
+  height: 250px;
+  max-height: 250px;
 `
 
-export default MiniWineryCard;
+const MiniWineryCardContainer = styled.div`
+  ${hoverAnimationStyle}
+  display: inline-block;
+  vertical-align: middle;
+  box-sizing: content-box;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 0 3px #5b0b0b;
+  }
+
+  & > h2,
+  p {
+    margin: 1rem;
+  }
+`
+
+const MiniWineryCard = ({ image, name, description }) => (
+  <MiniWineryCardContainer>
+    <WineryImage fluid={image} />
+    <h2>{name}</h2>
+    <EllipsisParagraph lineNumber={3}>{description}</EllipsisParagraph>
+  </MiniWineryCardContainer>
+)
+
+export default MiniWineryCard

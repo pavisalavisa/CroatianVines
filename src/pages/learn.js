@@ -90,11 +90,11 @@ const Learn = ({ data }) => {
         }
         imageTextRef={scrollSteps[2].elementRef}
       />
-      <Divider margin="5% 10%" />
-      <CenteredParagraph>
+      <Divider margin="10% 0 0 0" />
+      <StyledH1 centered>
         Our winemakers are eager to see you. Allow them to share their secrets
-        with you. Book a winery tour with us!
-      </CenteredParagraph>
+        with you.
+      </StyledH1>
       <WinerySuggestions />
     </Layout>
   )

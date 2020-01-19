@@ -1,46 +1,32 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
-import styled from "styled-components"
 import ImageText from "../components/imageText"
 import Divider from "../components/common/divider"
 import HeroImage from "../components/heroImage"
 import { useState } from "react"
-import { Link } from "gatsby"
 import { StyledH1 } from "../components/common/headers"
 import Comments from "../components/comments/comments"
 import Ratings from "../components/common/ratings"
 import { CenteredParagraph } from "../components/common/paragraphs"
 import { isAuthenticated } from "../services/authService"
-
-const WhiteH1 = styled.h1`
-  text-align: center;
-  color: white;
-  font-size: ${props => (props.fontSize ? props.fontSize : null)};
-`
-
-const StyledLink = styled(Link)`
-  background: rgba(255, 255, 255, 0.3);
-  text-decoration: none;
-  font-size: 400%;
-  font-weight: bold;
-  color: white;
-  border: 3px solid white;
-  padding: 1rem 2rem;
-  border-radius: 6px;
-  margin-top: 3rem;
-
-  &:hover {
-    border: 5px solid #5b0b0b;
-    background: rgb(91, 11, 11, 0.3);
-  }
-`
+import { TransparentTextButton } from "../components/common/button"
+import { navigate } from "@reach/router"
 
 const BrowseCollection = () => (
   <div>
-    <WhiteH1>Not what you're looking for?</WhiteH1>
-    <WhiteH1 fontSize="220%">Check out our</WhiteH1>
-    <StyledLink to="/collection">Collection</StyledLink>
+    <StyledH1 centered secondaryColor>
+      Not what you're looking for?
+    </StyledH1>
+    <StyledH1 centered secondaryColor fontSize="200%">
+      Check out our
+    </StyledH1>
+    <TransparentTextButton
+      fontSize="300%"
+      onClick={() => navigate(`/collection/`)}
+    >
+      Collection
+    </TransparentTextButton>
   </div>
 )
 

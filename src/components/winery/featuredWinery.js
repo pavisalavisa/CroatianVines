@@ -2,30 +2,29 @@ import styled from "styled-components"
 import React from "react"
 import Img from "gatsby-image"
 
-import FlexRow from "../common/container"
 import { AnchorLink } from "../common/link"
 import { EllipsisParagraph } from "../common/paragraphs"
 
-const FeaturedWineryContainer = styled(FlexRow)`
-    flex-wrap:nowrap;
-    align-items:flex-start;
-`
+const FeaturedWineryContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-rows: 1fr;
+  grid-gap: 5vw;
 
-const ContentContainer = styled.div`
-    width:50%;
-`
-
-const WineryImage = styled(Img)`
-    width:40%;
+  @media screen and (max-width: 1000px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-auto-rows: 1fr;
+  }
 `
 
 export default ({ name, description, image }) => (
-    <FeaturedWineryContainer>
-        <ContentContainer>
-            <h2>Featured winery: {name}</h2>
-            <EllipsisParagraph lineNumber={5}>{description}</EllipsisParagraph>
-            <AnchorLink>Learn more</AnchorLink>
-        </ContentContainer>
-        <WineryImage fluid={image} />
-    </FeaturedWineryContainer>
+  <FeaturedWineryContainer>
+    <div>
+      <h2>Featured winery: {name}</h2>
+      <EllipsisParagraph lineNumber={5}>{description}</EllipsisParagraph>
+      <AnchorLink>Learn more</AnchorLink>
+    </div>
+    <Img fluid={image} />
+  </FeaturedWineryContainer>
 )

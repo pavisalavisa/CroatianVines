@@ -1,10 +1,11 @@
 import styled, { css } from "styled-components"
 
 export const FlexRow = styled.div`
-  display: flex;
-  align-items:center;
-  justify-content:space-between;
+  display: ${props => props.hidden ? "none" : "flex"};
+  align-items:${props => props.alignItems ? props.alignItems : "center"};
+  justify-content:${props => props.justifyContent ? props.justifyContent : 'space-between'};
   flex-wrap:${props => props.flexWrap ? props.flexWrap : "wrap"};
+  margin:${props => props.margin ? props.margin : "0"};
 `
 
 export const underlinedContainerStyle = css`

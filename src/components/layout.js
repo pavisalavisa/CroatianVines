@@ -14,7 +14,7 @@ const StyledMain = styled.main`
 
   > * {
     width:80%;
-    margin-top:5%; 
+    margin-top:10%; 
   }
 
   @media screen and (max-width: 640px){

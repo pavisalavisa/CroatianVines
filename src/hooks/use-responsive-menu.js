@@ -29,10 +29,10 @@ export const useOnOutsideEvent = handleOutsideClick => {
   }
 
   useMountEffect(() => {
-    document.addEventListener("click", onClick, false)
+    document.addEventListener("mousedown", onClick, false)
     document.addEventListener("keydown", handleKeyPress(onClick))
     return () => {
-      document.removeEventListener("click", onClick, false)
+      document.removeEventListener("mousedown", onClick, false)
       document.removeEventListener("keydown", handleKeyPress(onClick))
     }
   })
@@ -65,20 +65,20 @@ export const useResponsiveMenu = ({
       const menuResult = Array.from(items).reduce(
         (result, menuItem, index) => {
           result.cumulativeWidth += menuItem.offsetWidth + itemMargin
-          
+
           const { text, path, partiallyActive } = menuItems[index]
 
           result.cumulativeWidth < maxWidth
             ? result.visibleItems.push({
-              text,
-              path,
-              partiallyActive: !!partiallyActive,
-            })
+                text,
+                path,
+                partiallyActive: !!partiallyActive,
+              })
             : result.hiddenItems.push({
-              text,
-              path,
-              partiallyActive: !!partiallyActive,
-            })
+                text,
+                path,
+                partiallyActive: !!partiallyActive,
+              })
 
           return result
         },

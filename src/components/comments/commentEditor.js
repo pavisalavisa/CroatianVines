@@ -10,6 +10,7 @@ import { isAuthenticated } from "../../services/authService"
 import nanoid from "nanoid"
 import Modal from "../common/modal"
 import AuthenticationForm from "../authenticationForm"
+import authenticatedImage from "../../images/authenticatedImage.jpg"
 
 const CommentEditorContainer = styled.div`
   margin-bottom: 5%;
@@ -19,6 +20,9 @@ export default ({ postCommentAction, authenticationRequired }) => {
   const [buttonsHidden, setButtonsHidden] = useState(true)
   const [textAreaText, setTextAreaText] = useState("")
   const [displayLoginModal, setDisplayLoginModal] = useState(false)
+  const [userImage, setUserImage] = useState(
+    isAuthenticated() ? authenticatedImage : DefaultUserImage
+  )
   const inputRef = useRef(null)
 
   const handleInputFocus = () => {
@@ -42,6 +46,7 @@ export default ({ postCommentAction, authenticationRequired }) => {
       id: nanoid(),
       name: "Antonio Kristiceivc",
       content: textAreaText,
+      image: authenticatedImage,
     })
     setTextAreaText("")
     setButtonsHidden(true)
@@ -51,11 +56,16 @@ export default ({ postCommentAction, authenticationRequired }) => {
     <CommentEditorContainer>
       {displayLoginModal && (
         <Modal handleClose={() => setDisplayLoginModal(false)}>
-          <AuthenticationForm onLogIn={() => setDisplayLoginModal(false)} />
+          <AuthenticationForm
+            onLogIn={() => {
+              setDisplayLoginModal(false)
+              setUserImage(authenticatedImage)
+            }}
+          />
         </Modal>
       )}
       <FlexRow alignItems="flex-start">
-        <UserCommentImage alt="avatar" src={DefaultUserImage} />
+        <UserCommentImage alt="avatar" src={userImage} />
         <ResizableTextBox
           ref={inputRef}
           value={textAreaText}

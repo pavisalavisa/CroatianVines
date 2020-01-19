@@ -12,6 +12,10 @@ const LoginFormContainer = styled.div`
   align-items: center;
 `
 
+const ErrorText = styled.p`
+  color: red;
+`
+
 export default ({ onLogIn }) => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
@@ -35,7 +39,7 @@ export default ({ onLogIn }) => {
   return (
     <LoginFormContainer>
       <h4>Please log in to proceed</h4>
-      {authError ? <p>{authError}</p> : null}
+      {authError ? <ErrorText>{authError}</ErrorText> : null}
       <Input
         margin="0 0 5% 0"
         type="text"

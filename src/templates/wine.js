@@ -10,6 +10,8 @@ import { Link } from "gatsby"
 import { StyledH1 } from "../components/common/headers"
 import Comments from "../components/comments/comments"
 import Ratings from "../components/common/ratings"
+import { CenteredParagraph } from "../components/common/paragraphs"
+import { isAuthenticated } from "../services/authService"
 
 const WhiteH1 = styled.h1`
   text-align: center;
@@ -64,6 +66,11 @@ export default ({ data }) => {
       ))}
       <div>
         <StyledH1 centered>How do you like this wine?</StyledH1>
+        {!isAuthenticated() && (
+          <CenteredParagraph>
+            You need to be logged in to cast your vote.
+          </CenteredParagraph>
+        )}
         <Ratings rating={rating} changeRating={setRating} />
         <Comments commentsList={commentsList} />
       </div>

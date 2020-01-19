@@ -16,7 +16,7 @@ import more from "../images/more.svg"
 const StyledHeader = styled.header`
   background: white;
   padding: 0;
-  box-shadow: 0 0 14px 0 rgb(126, 34, 66, 0.3);
+  box-shadow: 0 0 10px 0 rgb(126, 34, 66, 0.3);
   position: sticky;
   top: 0;
   width: 100%;

@@ -10,7 +10,7 @@ import { isAuthenticated } from "../../services/authService"
 import nanoid from "nanoid"
 import Modal from "../common/modal"
 import AuthenticationForm from "../authenticationForm"
-import authenticatedImage from "../../images/authenticatedImage.jpg"
+import authenticatedImage from "../../images/authenticatedUserImage.jpg"
 
 const CommentEditorContainer = styled.div`
   margin-bottom: 5%;

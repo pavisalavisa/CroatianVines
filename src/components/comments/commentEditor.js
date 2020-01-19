@@ -54,7 +54,7 @@ export default ({ postCommentAction, authenticationRequired }) => {
         show={displayLoginModal}
         handleClose={() => setDisplayLoginModal(false)}
       >
-        <AuthenticationForm />
+        <AuthenticationForm onLogIn={() => setDisplayLoginModal(false)} />
       </Modal>
       <FlexRow alignItems="flex-start">
         <UserCommentImage alt="avatar" src={DefaultUserImage} />

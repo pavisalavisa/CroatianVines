@@ -12,9 +12,11 @@ import FeaturedWinery from "../components/winery/featuredWinery"
 import WineryCard from "../components/winery/wineryCard"
 
 const WinerySearchResultContainer = styled.div`
-  > * {
-    margin-top: 5%;
-  }
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-auto-rows: 1fr;
+  grid-gap: 5vh;
+  margin-top: 5%;
 `
 
 const Experience = ({ data }) => {

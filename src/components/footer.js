@@ -7,8 +7,14 @@ import { Link, useStaticQuery, graphql } from "gatsby"
 import { hoverAnimationStyle } from "./common/container"
 
 const StyledFooter = styled.footer`
-  margin: 10% 10% 0 10%;
-  width: 80%;
+  padding-top: 5%;
+  margin-top: 10%;
+  width: 100%;
+  background-color: rgba(191, 148, 148, 0.2);
+
+  & > div {
+    margin: 0 10%;
+  }
 `
 const StyledMenuItem = styled(props => <Link {...props} />)`
   ${underlinedContainerStyle}
@@ -75,18 +81,19 @@ const Footer = ({ logo, siteDescription, siteAuthor, navigationItems }) => {
 
   return (
     <StyledFooter>
-      <FooterNavigation logo={logo} navigationItems={navigationItems} />
-      <FlexRow justifyContent="center" margin="2.5% 0 ">
-        <FlexRow justifyContent="space-around" width="300px" maxWidth="100%">
-          {data.socialMediaIcons.nodes.map(icon => (
-            <SocialMediaIcon src={icon.childImageSharp.fixed.src} />
-          ))}
+      <div>
+        <FlexRow justifyContent="center" margin="2.5% 0 ">
+          <FlexRow justifyContent="space-around" width="300px" maxWidth="100%">
+            {data.socialMediaIcons.nodes.map(icon => (
+              <SocialMediaIcon src={icon.childImageSharp.fixed.src} />
+            ))}
+          </FlexRow>
         </FlexRow>
-      </FlexRow>
-      <CopyrightContainer>
-        © {new Date().getFullYear()} Croatian Vines, {siteDescription}{" "}
-        {siteAuthor}
-      </CopyrightContainer>
+        <CopyrightContainer>
+          © {new Date().getFullYear()} Croatian Vines, {siteDescription}{" "}
+          {siteAuthor}
+        </CopyrightContainer>
+      </div>
     </StyledFooter>
   )
 }

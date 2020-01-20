@@ -36,20 +36,16 @@ const StyledMenuItem = styled(Link)`
 
 const MenuItem = props => (
   <Location>
-    {({ location }) => {
-      console.log(location)
-      console.log(props)
-      return (
-        <StyledMenuItem
-          isActive={
-            location.pathname.replace("/", "") === props.to.replace("/", "")
-          }
-          {...props}
-        >
-          {props.children}
-        </StyledMenuItem>
-      )
-    }}
+    {({ location }) => (
+      <StyledMenuItem
+        isActive={
+          location.pathname.replace("/", "") === props.to.replace("/", "")
+        }
+        {...props}
+      >
+        {props.children}
+      </StyledMenuItem>
+    )}
   </Location>
 )
 

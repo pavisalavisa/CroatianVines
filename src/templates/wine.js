@@ -1,14 +1,14 @@
 import React from "react"
+import SEO from "../components/seo"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import ImageText from "../components/imageText"
-import Divider from "../components/common/divider"
 import HeroImage from "../components/heroImage"
 import { useState } from "react"
 import { StyledH1 } from "../components/common/headers"
 import Comments from "../components/comments/comments"
 import Ratings from "../components/common/ratings"
-import { CenteredParagraph } from "../components/common/paragraphs"
+import { StyledParagraph } from "../components/common/paragraphs"
 import { isAuthenticated } from "../services/authService"
 import { TransparentTextButton } from "../components/common/button"
 import { navigate } from "@reach/router"
@@ -32,6 +32,7 @@ const BrowseCollection = () => (
 
 export default ({ data }) => {
   const wine = { id: data.wine.id, ...data.wine.data }
+  const heroImage = data.heroImage.childImageSharp
   const introductionParagraph = wine.Contents[0].data.Content
   const contents = wine.Contents.slice(1, wine.Contents.length)
   const bottomHeroImage = data.bottomHeroImage.childImageSharp
@@ -40,9 +41,15 @@ export default ({ data }) => {
 
   return (
     <Layout>
-      <StyledH1 centered>{wine.Name}</StyledH1>
-      <p>{introductionParagraph}</p>
-      <Divider margin="0 10%" />
+      <SEO title={wine.Name} />
+      <HeroImage fluid={heroImage.fluid} height="40vh">
+        <StyledH1 centered secondaryColor fontSize="400%">
+          {wine.Name}
+        </StyledH1>
+      </HeroImage>
+      <StyledParagraph margin="5% 10% 0 10%">
+        {introductionParagraph}
+      </StyledParagraph>
       {contents.map((c, i) => (
         <ImageText
           contents={{ content: c.data.Content, subscript: c.data.Subscript }}
@@ -53,14 +60,19 @@ export default ({ data }) => {
       <div>
         <StyledH1 centered>How do you like this wine?</StyledH1>
         {!isAuthenticated() && (
-          <CenteredParagraph>
+          <StyledParagraph centered>
             You need to be logged in to cast your vote.
-          </CenteredParagraph>
+          </StyledParagraph>
         )}
         <Ratings rating={rating} changeRating={setRating} />
         <Comments commentsList={commentsList} />
       </div>
-      <HeroImage margin="10% 0 0 0" height="75vh" fluid={bottomHeroImage.fluid}>
+      <HeroImage
+        margin="10% 0 -10% 0"
+        height="75vh"
+        fluid={bottomHeroImage.fluid}
+        hideGradient
+      >
         <BrowseCollection />
       </HeroImage>
     </Layout>
@@ -68,7 +80,15 @@ export default ({ data }) => {
 }
 
 export const query = graphql`
-  query query($wineId: String!) {
+  query($wineId: String!) {
+    heroImage: file(relativePath: { in: "wine-heroImage.jpg" }) {
+      childImageSharp {
+        fluid(quality: 100) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+
     bottomHeroImage: file(relativePath: { in: "wine-bottomHeroImage.jpg" }) {
       childImageSharp {
         fluid(quality: 100) {

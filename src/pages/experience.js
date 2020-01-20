@@ -16,7 +16,7 @@ const WinerySearchResultContainer = styled.div`
   grid-template-rows: 1fr;
   grid-auto-rows: 1fr;
   grid-gap: 5vh;
-  margin-top: 5%;
+  margin-top: 5vh;
 `
 
 const Experience = ({ data }) => {

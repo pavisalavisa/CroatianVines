@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import React from "react"
 
 export const StyledParagraph = styled.p`
   text-align: ${props => (props.centered ? "center" : "left")};
@@ -22,3 +23,11 @@ export const EllipsisParagraph = styled.p`
   -webkit-line-clamp: ${props => (props.lineNumber ? props.lineNumber : null)};
   -webkit-box-orient: vertical;
 `
+
+export const ParagraphWithLineBreaks = props =>
+  props.string.split("\n").map((text, index) => (
+    <React.Fragment key={`${text}-${index}`}>
+      <StyledParagraph {...props}>{text}</StyledParagraph>
+      <br />
+    </React.Fragment>
+  ))

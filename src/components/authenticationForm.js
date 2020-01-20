@@ -10,13 +10,14 @@ const LoginFormContainer = styled.div`
   justify-content: center;
   padding: 15%;
   align-items: center;
+  margin: ${props => props.margin};
 `
 
 const ErrorText = styled.p`
   color: red;
 `
 
-export default ({ onLogIn }) => {
+export default ({ onLogIn, margin }) => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [authError, setAuthError] = useState(null)
@@ -37,7 +38,7 @@ export default ({ onLogIn }) => {
   }
 
   return (
-    <LoginFormContainer>
+    <LoginFormContainer margin={margin}>
       <h4>Please log in to proceed</h4>
       {authError ? <ErrorText>{authError}</ErrorText> : null}
       <Input

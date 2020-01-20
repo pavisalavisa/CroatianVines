@@ -48,7 +48,10 @@ const Footer = ({ siteDescription, siteAuthor }) => {
         <FlexRow justifyContent="center" margin="2.5% 0 ">
           <FlexRow justifyContent="space-around" width="300px" maxWidth="100%">
             {data.socialMediaIcons.nodes.map(icon => (
-              <SocialMediaIcon src={icon.childImageSharp.fixed.src} />
+              <SocialMediaIcon
+                key={icon.childImageSharp.fixed.src}
+                src={icon.childImageSharp.fixed.src}
+              />
             ))}
           </FlexRow>
         </FlexRow>

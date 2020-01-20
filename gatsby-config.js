@@ -24,11 +24,11 @@ module.exports = {
         path: "/experience",
         partiallyActive: true,
       },
-      {
-        text: "Reviews",
-        path: "/reviews",
-        partiallyActive: true,
-      },
+      // {
+      //   text: "Reviews",
+      //   path: "/reviews",
+      //   partiallyActive: true,
+      // },
       {
         text: "Login",
         path: "/login",

@@ -26,8 +26,8 @@ const SearchBoxContainer = styled.div`
 `
 
 const PaddedInput = styled(Input)`
-  padding-right: ${props => props =>
-    props.iconWidth ? props.iconWidth + 5 : 0}px;
+  padding-right: ${props =>
+    props.paddingRight ? props.paddingRight + 5 : 0}px;
 `
 
 const SearchBox = ({ hint, onSearch, onFocus }) => {
@@ -72,7 +72,7 @@ const SearchBox = ({ hint, onSearch, onFocus }) => {
         width="60%"
         minWidth="325px"
         onFocus={onFocus}
-        iconWidth={inputHeight}
+        paddingRight={inputHeight}
       />
       <SerachIcon src={searchButton} height={inputHeight - 20} />
     </SearchBoxContainer>

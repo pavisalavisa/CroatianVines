@@ -17,7 +17,7 @@ const ErrorText = styled.p`
   color: red;
 `
 
-export default ({ onLogIn, margin }) => {
+export default ({ onLogIn, margin, isAuth, setIsAuth }) => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [authError, setAuthError] = useState(null)
@@ -33,7 +33,7 @@ export default ({ onLogIn, margin }) => {
     }
 
     logIn(username, password)
-
+    setIsAuth(true)
     onLogIn()
   }
 

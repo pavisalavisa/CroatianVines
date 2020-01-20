@@ -42,7 +42,7 @@ const Collection = ({ data }) => {
   return (
     <Layout>
       <SEO title="Explore" />
-      <HeroImage fluid={heroImage.fixed} height="400px">
+      <HeroImage fluid={heroImage.fluid} height="400px">
         <StyledH1 centered secondaryColor fontSize="400%">
           Explore our wine collection
         </StyledH1>
@@ -73,8 +73,8 @@ export const query = graphql`
   {
     heroImage: file(relativePath: { in: "collection-heroImage.jpg" }) {
       childImageSharp {
-        fixed(quality: 100, height: 1333, width: 2000) {
-          ...GatsbyImageSharpFixed
+        fluid(quality: 100) {
+          ...GatsbyImageSharpFluid
         }
       }
     }

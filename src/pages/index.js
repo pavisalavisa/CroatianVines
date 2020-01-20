@@ -24,6 +24,9 @@ const IndexPage = ({ data }) => {
           <StyledH1 centered secondaryColor fontSize="400%">
             Discover Croatia's bottled poetry
           </StyledH1>
+          <StyledH1 centered secondaryColor fontSize="200%">
+            with our
+          </StyledH1>
           <TransparentTextButton
             onClick={() => navigate(`/collection/`)}
             fontSize="250%"

@@ -9,7 +9,6 @@ import PropTypes from "prop-types"
 import React from "react"
 import styled from "styled-components"
 import { ImageLink } from "./common/link"
-import StyledButton from "./common/button"
 import { FlexRow, underlinedContainerStyle } from "./common/container"
 import more from "../images/more.svg"
 import { Location } from "@reach/router"
@@ -69,7 +68,7 @@ const Triangle = styled.div`
   background-color: white;
 `
 
-const MoreButtonContainer = styled(props => <div {...props} />)`
+const MoreButtonContainer = styled.div`
   display: flex;
   flex-shrink: 0;
   justify-content: center;
@@ -172,37 +171,6 @@ const MenuItems = ({ menuItems }) => {
     </StyledNav>
   )
 }
-
-const loggedIn = true
-
-const AccountSection = () =>
-  loggedIn ? (
-    <FlexRow>
-      <StyledButton
-        margin="0.5rem"
-        primary
-        onClick={() => console.log("Clicked log in!")}
-      >
-        Log in
-      </StyledButton>
-      <StyledButton
-        margin="0.5rem"
-        onClick={() => console.log("Clicked register!")}
-      >
-        Register
-      </StyledButton>
-    </FlexRow>
-  ) : (
-    <FlexRow>
-      <StyledButton
-        margin={"0.5rem"}
-        primary
-        onClick={() => console.log("Clicked log out!")}
-      >
-        Log out
-      </StyledButton>
-    </FlexRow>
-  )
 
 const Navigation = ({ logo, menuItems }) => (
   <StyledHeader>

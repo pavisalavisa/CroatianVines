@@ -24,9 +24,14 @@ module.exports = {
         path: "/experience",
         partiallyActive: true,
       },
+      // {
+      //   text: "Reviews",
+      //   path: "/reviews",
+      //   partiallyActive: true,
+      // },
       {
-        text: "Reviews",
-        path: "/reviews",
+        text: "Login",
+        path: "/login",
         partiallyActive: true,
       },
     ],
@@ -99,10 +104,10 @@ module.exports = {
           {
             baseId: `app1YxhjCyOseAVb1`,
             tableName: `Contents`,
-            mapping: { Image: `fileNode` }
-          }
-        ]
-      }
-    }
+            mapping: { Image: `fileNode` },
+          },
+        ],
+      },
+    },
   ],
 }

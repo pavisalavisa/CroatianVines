@@ -38,6 +38,7 @@ const IndexPage = ({ data }) => {
       </HeroImage>
       {imageContents.map((ic, i) => (
         <ImageText
+          key={i}
           mirrored={i % 2}
           image={ic.image.fluid}
           contents={ic.content}

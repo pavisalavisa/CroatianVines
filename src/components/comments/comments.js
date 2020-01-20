@@ -8,6 +8,7 @@ import FadeIn from "../common/animations/fadeIn"
 
 const CommentsContainer = styled.div`
   display: grid;
+  grid-template-columns: 100%;
   grid-template-rows: 1fr;
   grid-auto-rows: auto;
   grid-gap: 2.5vh;
@@ -19,7 +20,7 @@ const CommentContentContainer = styled.div`
 `
 
 const SingleComment = ({ name, content, image }) => (
-  <FlexRow alignItems="flex-start">
+  <FlexRow alignItems="flex-start" flexWrap="nowrap">
     <UserCommentImage alt="avatar" src={image} />
     <CommentContentContainer>
       <h4>{name}</h4>

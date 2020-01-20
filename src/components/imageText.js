@@ -1,7 +1,10 @@
 import React from "react"
 import styled from "styled-components"
 import Image from "gatsby-image"
-import { SubscriptParagraph } from "../components/common/paragraphs"
+import {
+  SubscriptParagraph,
+  ParagraphWithLineBreaks,
+} from "../components/common/paragraphs"
 
 const ContentContainer = styled.div`
   @media screen and (max-width: 1000px) {
@@ -19,7 +22,7 @@ const Content = ({ wrapReverse, contents }) => {
   return (
     <ContentContainer wrapReverse>
       {title ? <h1>{title}</h1> : null}
-      <p>{content}</p>
+      <ParagraphWithLineBreaks string={content} />
       <SubscriptContainer>
         <SubscriptParagraph>{subscript}</SubscriptParagraph>
       </SubscriptContainer>

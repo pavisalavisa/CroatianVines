@@ -24,7 +24,7 @@ const Learn = ({ data }) => {
   return (
     <Layout>
       <SEO title="Learn" />
-      <HeroImage fluid={heroImage.fixed} height="400px">
+      <HeroImage fluid={heroImage.fluid} height="400px">
         <StyledH1 centered secondaryColor fontSize="400%">
           How do we do it?
         </StyledH1>
@@ -127,8 +127,8 @@ export const query = graphql`
   {
     heroImage: file(relativePath: { in: "learn-heroImage.jpg" }) {
       childImageSharp {
-        fixed(quality: 100, height: 2800, width: 4200) {
-          ...GatsbyImageSharpFixed
+        fluid(quality: 100) {
+          ...GatsbyImageSharpFluid
         }
       }
     }

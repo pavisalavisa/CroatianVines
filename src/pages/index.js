@@ -19,7 +19,7 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <SEO title="Home" />
-      <HeroImage fluid={heroImage.fixed} height="80vh">
+      <HeroImage fluid={heroImage.fluid} height="80vh">
         <div>
           <StyledH1 centered secondaryColor fontSize="400%">
             Discover Croatia's bottled poetry
@@ -51,8 +51,8 @@ export const query = graphql`
   {
     heroImage: file(relativePath: { in: "home-heroImage.jpg" }) {
       childImageSharp {
-        fixed(quality: 100, height: 2199, width: 3298) {
-          ...GatsbyImageSharpFixed
+        fluid(quality: 100) {
+          ...GatsbyImageSharpFluid
         }
       }
     }

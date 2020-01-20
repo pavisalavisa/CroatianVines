@@ -46,7 +46,7 @@ const Experience = ({ data }) => {
   return (
     <Layout>
       <SEO title="Explore" />
-      <HeroImage fluid={heroImage.fixed} height="400px">
+      <HeroImage fluid={heroImage.fluid} height="400px">
         <StyledH1 centered secondaryColor fontSize="400%">
           Ready for an adventure?
         </StyledH1>
@@ -81,8 +81,8 @@ export const query = graphql`
   {
     heroImage: file(relativePath: { in: "experience-heroImage.jpg" }) {
       childImageSharp {
-        fixed(quality: 100, width: 1920, height: 620) {
-          ...GatsbyImageSharpFixed
+        fluid(quality: 100) {
+          ...GatsbyImageSharpFluid
         }
       }
     }

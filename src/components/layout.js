@@ -7,19 +7,19 @@ import Navigation from "./navigation"
 import Footer from "./footer"
 
 const StyledMain = styled.main`
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  align-items:center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 
   > * {
-    width:80%;
-    margin-top:10%; 
+    width: 80%;
+    margin-top: 10%;
   }
 
-  @media screen and (max-width: 640px){
+  @media screen and (max-width: 640px) {
     > * {
-    width:90%;
+      width: 90%;
     }
   }
 `
@@ -58,10 +58,8 @@ const Layout = ({ children }) => {
       />
       <StyledMain>{children}</StyledMain>
       <Footer
-        logo={data.file.childImageSharp.fixed}
         siteDescription={data.site.siteMetadata.description}
         siteAuthor={data.site.siteMetadata.author}
-        navigationItems={data.site.siteMetadata.menuItems}
       />
     </>
   )

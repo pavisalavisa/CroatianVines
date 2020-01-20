@@ -5,7 +5,7 @@ import TextareaAutosize from "react-autosize-textarea"
 const StyledTextArea = styled(TextareaAutosize)`
   padding: 0.5rem;
   resize: none;
-  overflow-y: hidden;
+  overflow-y: hidden !important;
   position: relative;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);

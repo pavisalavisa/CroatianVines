@@ -39,8 +39,6 @@ export default ({ data }) => {
   const commentsList = data.dataJson.commentsList
   const [rating, setRating] = useState(0)
 
-  console.log(contents)
-
   return (
     <Layout>
       <SEO title={wine.Name} />
@@ -73,6 +71,7 @@ export default ({ data }) => {
         margin="10% 0 -10% 0"
         height="75vh"
         fluid={bottomHeroImage.fluid}
+        hideGradient
       >
         <BrowseCollection />
       </HeroImage>

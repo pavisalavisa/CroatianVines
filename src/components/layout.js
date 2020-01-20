@@ -1,10 +1,11 @@
-import React from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
 
 import Navigation from "./navigation"
 import Footer from "./footer"
+import { isAuthenticated } from "../services/authService"
 
 const StyledMain = styled.main`
   display: flex;
@@ -25,6 +26,8 @@ const StyledMain = styled.main`
 `
 
 const Layout = ({ children }) => {
+  const [isAuth, setIsAuth] = useState(isAuthenticated())
+
   const data = useStaticQuery(graphql`
     query HeaderQuery {
       site {
@@ -50,13 +53,27 @@ const Layout = ({ children }) => {
     }
   `)
 
+  let menuItems = data.site.siteMetadata.menuItems
+  if (isAuth) {
+    menuItems = menuItems.filter(x => !x.text.includes("Login"))
+    menuItems.push({
+      text: "Logout",
+      path: "/logout",
+      partiallyActive: true,
+    })
+  }
+
   return (
     <>
       <Navigation
         logo={data.file.childImageSharp.fixed}
-        menuItems={data.site.siteMetadata.menuItems}
+        menuItems={menuItems}
       />
-      <StyledMain>{children}</StyledMain>
+      <StyledMain>
+        {React.Children.toArray(children)
+          .filter(Boolean)
+          .map(child => React.cloneElement(child, { isAuth, setIsAuth }))}
+      </StyledMain>
       <Footer
         siteDescription={data.site.siteMetadata.description}
         siteAuthor={data.site.siteMetadata.author}

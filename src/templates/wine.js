@@ -52,6 +52,7 @@ export default ({ data }) => {
       </StyledParagraph>
       {contents.map((c, i) => (
         <ImageText
+          key={i}
           contents={{ content: c.data.Content, subscript: c.data.Subscript }}
           image={c.data.Image.localFiles[0].childImageSharp.fluid}
           mirrored={i % 2}

@@ -2,14 +2,14 @@ import React from "react"
 import styled from "styled-components"
 import { useState, useRef, useLayoutEffect } from "react"
 import Input from "./input"
-import searchButton from "../../images/searchButton.png"
+import searchButton from "../../images/searchButton.svg"
 
 const SerachIcon = styled.img`
   width: auto;
   height: ${props => (props.height ? props.height : "auto")}px;
   margin: 0;
   border-radius: 6px;
-  margin-left: ${props => (props.height ? -props.height : "0")}px;
+  margin-left: ${props => (props.height ? -props.height - 10 : "0")}px;
   z-index: 1;
 `
 
@@ -74,7 +74,7 @@ const SearchBox = ({ hint, onSearch, onFocus }) => {
         onFocus={onFocus}
         iconWidth={inputHeight}
       />
-      <SerachIcon src={searchButton} height={inputHeight} />
+      <SerachIcon src={searchButton} height={inputHeight - 20} />
     </SearchBoxContainer>
   )
 }

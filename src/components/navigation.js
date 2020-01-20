@@ -10,12 +10,9 @@ import React from "react"
 import styled from "styled-components"
 import { ImageLink } from "./common/link"
 import StyledButton from "./common/button"
-import {
-  FlexRow,
-  underlinedContainerStyle,
-  hoverAnimationStyle,
-} from "./common/container"
+import { FlexRow, underlinedContainerStyle } from "./common/container"
 import more from "../images/more.svg"
+import { Location } from "@reach/router"
 
 const StyledHeader = styled.header`
   background: white;
@@ -28,12 +25,33 @@ const StyledHeader = styled.header`
 `
 
 const StyledMenuItem = styled(Link)`
-  ${underlinedContainerStyle}
+  border-bottom: ${props => (props.isActive ? "4px solid #5b0b0b" : null)};
+  ${underlinedContainerStyle};
 
-  color: #5B0B0B;
+  font-size: 125%;
+  color: #5b0b0b;
   padding: 0.5rem;
   text-decoration: none;
 `
+
+const MenuItem = props => (
+  <Location>
+    {({ location }) => {
+      console.log(location)
+      console.log(props)
+      return (
+        <StyledMenuItem
+          isActive={
+            location.pathname.replace("/", "") === props.to.replace("/", "")
+          }
+          {...props}
+        >
+          {props.children}
+        </StyledMenuItem>
+      )
+    }}
+  </Location>
+)
 
 const StyledNav = styled.nav`
   display: flex;
@@ -93,9 +111,9 @@ const HiddenItemsContainer = styled.div`
 
 const VisibleItems = ({ visibleItems }) =>
   visibleItems.map(menuItem => (
-    <StyledMenuItem key={visibleItems.indexOf(menuItem)} to={menuItem.path}>
+    <MenuItem key={visibleItems.indexOf(menuItem)} to={menuItem.path}>
       {menuItem.text.toUpperCase()}
-    </StyledMenuItem>
+    </MenuItem>
   ))
 
 const HiddenItems = ({
@@ -117,13 +135,13 @@ const HiddenItems = ({
     >
       <Triangle />
       {menu.hiddenItems.map(menuItem => (
-        <StyledMenuItem
+        <MenuItem
           key={menuItem.path}
           to={menuItem.path}
           partiallyActive={menuItem.partiallyActive}
         >
           {menuItem.text}
-        </StyledMenuItem>
+        </MenuItem>
       ))}
     </HiddenItemsContainer>
   )

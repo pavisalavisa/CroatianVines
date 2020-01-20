@@ -6,6 +6,7 @@ export default styled.input`
   position: relative;
   border: 1px solid rgba(0, 0, 0, 0.3);
 
+  color: #333333;
   width: ${props => (props.width ? props.width : "auto")};
   min-width: ${props => (props.minWidth ? props.minWidth : null)};
   max-width: ${props => (props.maxWidth ? props.maxWidth : null)};

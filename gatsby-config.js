@@ -29,6 +29,11 @@ module.exports = {
         path: "/reviews",
         partiallyActive: true,
       },
+      {
+        text: "Login",
+        path: "/login",
+        partiallyActive: true,
+      },
     ],
   },
   plugins: [
@@ -99,10 +104,10 @@ module.exports = {
           {
             baseId: `app1YxhjCyOseAVb1`,
             tableName: `Contents`,
-            mapping: { Image: `fileNode` }
-          }
-        ]
-      }
-    }
+            mapping: { Image: `fileNode` },
+          },
+        ],
+      },
+    },
   ],
 }
